@@ -1,0 +1,1 @@
+﻿Stationsnamn;Klimatnummer;Mäthöjd (meter över marken)
