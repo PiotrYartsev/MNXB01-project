@@ -1,0 +1,9 @@
+﻿Stationsnamn;Klimatnummer;Mäthöjd (meter över marken)
+Visby Flygplats;78400;2.0
+
+Parameternamn;Beskrivning;Enhet
+Lufttemperatur;momentanvärde, 1 gång/tim;degree celsius
+
+Tidsperiod (fr.o.m);Tidsperiod (t.o.m);Höjd (meter över havet);Latitud (decimalgrader);Longitud (decimalgrader)
+1951-01-01 00:00:00;2015-12-01 07:00:00;42.0;57.6614;18.3428
+

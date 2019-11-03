@@ -1,0 +1,9 @@
+﻿Stationsnamn;Klimatnummer;Mäthöjd (meter över marken)
+Karlstad Flygplats;93220;2.0
+
+Parameternamn;Beskrivning;Enhet
+Lufttemperatur;momentanvärde, 1 gång/tim;degree celsius
+
+Tidsperiod (fr.o.m);Tidsperiod (t.o.m);Höjd (meter över havet);Latitud (decimalgrader);Longitud (decimalgrader)
+1997-10-01 00:00:00;2015-12-01 08:00:00;107.0;59.4446;13.3374
+1951-01-01 00:00:00;1997-09-30 23:59:59;46.0;59.3591;13.4732

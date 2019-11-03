@@ -1,0 +1,9 @@
+﻿Stationsnamn;Klimatnummer;Mäthöjd (meter över marken)
+Lund;53430;2.0
+
+Parameternamn;Beskrivning;Enhet
+Lufttemperatur;momentanvärde, 1 gång/tim;degree celsius
+
+Tidsperiod (fr.o.m);Tidsperiod (t.o.m);Höjd (meter över havet);Latitud (decimalgrader);Longitud (decimalgrader)
+1992-12-07 00:00:00;2015-11-30 23:59:59;25.0;55.693;13.229
+1974-06-01 00:00:00;1992-12-06 23:59:59;50.0;55.7089;13.2026

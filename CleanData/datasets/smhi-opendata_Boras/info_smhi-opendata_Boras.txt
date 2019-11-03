@@ -1,0 +1,9 @@
+﻿Stationsnamn;Klimatnummer;Mäthöjd (meter över marken)
+Borås;72450;2.0
+
+Parameternamn;Beskrivning;Enhet
+Lufttemperatur;momentanvärde, 1 gång/tim;degree celsius
+
+Tidsperiod (fr.o.m);Tidsperiod (t.o.m);Höjd (meter över havet);Latitud (decimalgrader);Longitud (decimalgrader)
+1961-01-01 00:00:00;2015-11-30 23:59:59;135.0;57.7611;12.9493
+

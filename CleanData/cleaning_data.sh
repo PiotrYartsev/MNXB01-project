@@ -11,8 +11,9 @@ declare -a data=(smhi-opendata_Lulea.csv smhi-opendata_Lund.csv smhi-opendata_Vi
 
 cd datasets/
 
-for name in ${data}
+for name in "${data[@]}"
 do
+echo "new"
 #if directory already exist for a data file remove it
 if [ -d ${name::-4} ]; then
    rm -r ${name::-4}

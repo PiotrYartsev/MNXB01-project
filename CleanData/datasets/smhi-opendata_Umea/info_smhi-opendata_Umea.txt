@@ -1,0 +1,9 @@
+﻿Stationsnamn;Klimatnummer;Mäthöjd (meter över marken)
+Umeå Flygplats;140480;2.0
+
+Parameternamn;Beskrivning;Enhet
+Lufttemperatur;momentanvärde, 1 gång/tim;degree celsius
+
+Tidsperiod (fr.o.m);Tidsperiod (t.o.m);Höjd (meter över havet);Latitud (decimalgrader);Longitud (decimalgrader)
+1962-01-01 00:00:00;1964-12-31 23:59:59;7.0;63.794700000000006;20.291800000000002
+1981-07-07 00:00:00;2015-12-01 10:00:00;14.0;63.794700000000006;20.291800000000002
