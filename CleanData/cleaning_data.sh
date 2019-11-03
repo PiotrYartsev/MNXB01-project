@@ -32,7 +32,7 @@ head -n 9 ${name} >> ${name::-4}/info_${name::-3}txt
 while IFS=, read -r field1 
 do
 if [[ $field1 == *";;"* ]]; then
-	if [[ $field1 == *"G"* ]]; then
+	if [[ $field1 == *"G;;"* ]]; then
     echo -n "$field1"|sed 's/;;.*//' >> ${name::-4}/data_${name::-3}txt
 fi 
 	continue
@@ -48,8 +48,3 @@ done
 cd ..
 echo "done"
 
-#if [[ ( $? != 0 ) || (! -e $STATSDIR) ]]; then
-#   echo "Directory creation failed or stats directory missing. Please check your code."
-#   echo "The script cannot continue. Exiting..."
-#   exit 1
-#fi
