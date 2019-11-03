@@ -1,2 +1,3 @@
 Added a directory Clean Data with all the wether data and the code that cleans the wether data and a directory with the outcome of the cleaning code. The code has issue with its output, will look into it tomorrow
 fixed the cleaning code a bit, still not done
+Date_data not creating for Lulea, dont know why
