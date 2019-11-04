@@ -46,13 +46,18 @@ for name in "${data[@]}"
 	  echo -n -e "$field1 \n" >> ${name::-4}/data_${name::-3}txt
 	fi 
 	done < ${name}
+	
+	
 	touch ${name::-4}/data_date_${name::-3}txt
 
 
-	touch ${name::-4}/data_date_${name::-3}txt
-	while IFS= read -r line
+	touch ${name::-4}/data_temp_${name::-3}txt
+	while IFS=';' read -r one two three four
 	do
-	  echo -n -e "$line\n" |sed 's/;.*//' >> ${name::-4}/data_date_${name::-3}txt
+	  echo -n -e "$one\n"  >> ${name::-4}/data_date_${name::-3}txt
+	  echo -n -e "$two\n"  >> ${name::-4}/data_time_${name::-3}txt
+	  echo -n -e "$three\n"  >> ${name::-4}/data_temp_${name::-3}txt
+	  
 	done < ${name::-4}/data_${name::-3}txt
 
 
