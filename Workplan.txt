@@ -1,0 +1,36 @@
+The goal of this project is to find at least three interesting results from the SMHI data.
+The Data set consists of Essentialy these parameters: Time (in format year-month-day-hour:minute), Temperature, longitude, latitude, altitude.
+
+The three main questions we are interested in from these measurements are:
+
+1. Has the annual average temperature in Uppsala increased significantly since the industrial revolution in Sweden, approx 1880?
+
+2. How does the length of winter, according to SMHI's metereological definition of winter, change with latitude?
+
+3. Which is the hottest and coldest day most likely to occur in one of the locations in the data set, for example Lund?
+
+We need to do the following:
+
+	*Implement a script (Bash?) that can clean up the data, that is, given the current format, we need a script that can change it to the year, 
+	the number of measurements that year (numbered by integers (1-365 for example)), and the temperatures. Discard bad data. If there is a lot (more than 50%) of bad data, use another dataset.
+
+ 
+	*Make nice plots and fit functions using ROOT with the data loaded from the new data sets, cleaned for our purposes.
+ 
+	*Write a report in latex.
+ 
+	*Have a meeting on Wednesday 6/11 15.00, to discuss how things are going.
+
+
+EXTRA NOTES:
+
+We are in charge of one of the three questions each. Leo Zethraeus has number 1. Piotr Yartsev number 2, Xi-Zhen Liu of number 3. This might change during the course of the project, please write
+in the Canvas group chat if there is someting you want to change/add/remove/discuss.
+
+The data sets are not identical, and we might need to use different data sets for the different questions, so we might need to implement or own clean-up scripts, even though inspiration
+ from others and help is useful. For example: The data set with daily-average temperatures in Uppsala might be more useful for comparison over many years, and there is only one measurement per day,
+ which is not the case in some other data sets.
+
+USEFUL TIPS:
+According to SMHI the definition of when winter starts is when the daily average temperature has been below five days in a row, the first day is counted as the first day of winter.
+Winter ends when the daily average temp. has been 0<T<10 degrees celsius for seven days in a row, the first of the days is the first day of Spring, i.e. the day after winter ends.
