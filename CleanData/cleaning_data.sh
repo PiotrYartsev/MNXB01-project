@@ -43,7 +43,7 @@ for name in "${data[@]}"
 
 	#add data from cvs to file named data_"name".txt
 	if [[ $field1 == *"G"* ]]; then
-	  echo -n "$field1 \n" >> ${name::-4}/data_${name::-3}txt
+	  echo -n -e "$field1 \n" >> ${name::-4}/data_${name::-3}txt
 	fi 
 	done < ${name}
 	touch ${name::-4}/data_date_${name::-3}txt
@@ -52,8 +52,7 @@ for name in "${data[@]}"
 	touch ${name::-4}/data_date_${name::-3}txt
 	while IFS= read -r line
 	do
-		echo "hello"
-	  echo -n "$line" |sed 's/;.*//' >> ${name::-4}/data_date_${name::-3}txt
+	  echo -n -e "$line\n" |sed 's/;.*//' >> ${name::-4}/data_date_${name::-3}txt
 	done < ${name::-4}/data_${name::-3}txt
 
 
