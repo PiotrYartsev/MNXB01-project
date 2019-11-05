@@ -5,3 +5,6 @@ Problem fixed by adding -e flag to make escape char works
 
 Added a C++ script (annualtemp.cpp) to output the year since 1722-2013 and the yearly average temperature. This is mostly intended to work on the Uppsala dataset but can probably be modified to include other sets.
 The results from annualtemp.cpp are placed in a folder named UppsalaData and the output is called annualtemp.txt.
+
+-Changed a bug in annualtemp.cpp (from 2003 to 2013).
+-Added a C++ script (movingmean.cpp) that can compute moving means in user-input box-intervals. Can output a file with the mean over the full interval or a .txt file with moving means.
