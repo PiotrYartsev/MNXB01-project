@@ -2,4 +2,10 @@ Added a directory Clean Data with all the wether data and the code that cleans t
 fixed the cleaning code a bit, still not done
 Date_data not creating for Lulea, dont know why
 Problem fixed by adding -e flag to make escape char works
+
+
+Added a C++ script (annualtemp.cpp) to output the year since 1722-2013 and the yearly average temperature. This is mostly intended to work on the Uppsala dataset but can probably be modified to include other sets.
+The results from annualtemp.cpp are placed in a folder named UppsalaData and the output is called annualtemp.txt.
+
 Finished the code for now, added the date to data_date and temperature to to data_temp
+
