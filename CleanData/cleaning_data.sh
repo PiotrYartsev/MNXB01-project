@@ -50,7 +50,7 @@ for name in "${data[@]}"
 	
 	touch ${name::-4}/data_date_${name::-3}txt
 
-
+	#extract date, time and temp from cvs
 	touch ${name::-4}/data_temp_${name::-3}txt
 	while IFS=';' read -r one two three four
 	do
@@ -59,8 +59,12 @@ for name in "${data[@]}"
 	  echo -n -e "$three\n"  >> ${name::-4}/data_temp_${name::-3}txt
 	  
 	done < ${name::-4}/data_${name::-3}txt
+	
 
-
+	
+	
+	
+	
 done
 cd ..
 echo "done"
