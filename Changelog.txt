@@ -9,3 +9,5 @@ The results from annualtemp.cpp are placed in a folder named UppsalaData and the
 
 Finished the code for now, added the date to data_date and temperature to to data_temp
 
+Add a class dealing with date format string
+
