@@ -13,7 +13,7 @@ cd datasets/
 
 for name in "${data[@]}"
 	do
-	echo "new"
+	echo "new city"
 	#if directory already exist for a data file remove it
 	if [ -d ${name::-4} ]; then
 	   rm -r ${name::-4}
@@ -57,15 +57,12 @@ for name in "${data[@]}"
 	  echo -n -e "$one\n"  >> ${name::-4}/data_date_${name::-3}txt
 	  echo -n -e "$two\n"  >> ${name::-4}/data_time_${name::-3}txt
 	  echo -n -e "$three\n"  >> ${name::-4}/data_temp_${name::-3}txt
-	  
 	done < ${name::-4}/data_${name::-3}txt
+	#removes duplicate dates from ${name::-4}/data_date_${name::-3}txt
+	sed -i -n '$!N; /^\(.*\)\n\1$/!P; D' ${name::-4}/data_date_${name::-3}txt
 	
 
-	
-	
-	
 	
 done
 cd ..
 echo "done"
-
