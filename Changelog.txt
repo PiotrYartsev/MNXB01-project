@@ -9,8 +9,12 @@ The results from annualtemp.cpp are placed in a folder named UppsalaData and the
 
 Finished the code for now, added the date to data_date and temperature to to data_temp
 
+
 Added a class dealing with date format string
 
 Added a C++ script (dateOfPeakTemp.cpp) to output the hottest and coldest date in each year at specific location. Now only design for input format other than Uppsala.
 
 Added day_of_year function to class Date
+
+Starting to fix the code that calculated the average temp per day
+
