@@ -78,7 +78,7 @@ int main() {
 	int temp_col = 4;
 	double av = 0;
 	int first_year = 1722;
-	int last_year = 2003;
+	int last_year = 2013;
 	//Uncomment this if you want to change the number of columns (i.e. if using a different, but still compatible dataset):
 	/*cout << "Please enter the number of columns, this will only work for complete datasets: " << endl;
 	cin >> number_of_columns;
