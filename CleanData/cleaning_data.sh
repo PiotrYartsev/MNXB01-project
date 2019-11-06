@@ -69,8 +69,7 @@ for name in "${data[@]}"
 
 	while IFS= read -r line
 	do
-	grep ${line} ${name::-4}/data_${name::-3}txt | cut -d ';' -f 3- | tr -d '\n' >> ${name::-4}/data_temp_day_${name::-3}txt
-
+	grep ${line} ${name::-4}/data_${name::-3}txt | cut -d ';' -f 3- | tr -d '\n'  >> ${name::-4}/data_temp_day_${name::-3}txt
 
 	done < ${name::-4}/data_date_${name::-3}txt
 
