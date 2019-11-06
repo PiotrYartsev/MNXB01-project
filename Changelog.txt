@@ -9,3 +9,4 @@ The results from annualtemp.cpp are placed in a folder named UppsalaData and the
 
 Finished the code for now, added the date to data_date and temperature to to data_temp
 
+Starting to fix the code that calculated the average temp per day
