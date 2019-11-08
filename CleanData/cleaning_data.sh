@@ -1,11 +1,11 @@
 #!/bin/bash
 
 #List of all the data files that we will use in this project
-#declare -a data=(smhi-opendata_Lulea.csv smhi-opendata_Lund.csv smhi-opendata_Visby.csv smhi-opendata_Umea.csv smhi-opendata_Falsterbo.csv smhi-opendata_Soderarm.csv smhi-openda_Karlstad.csv smhi-opendata_Boras.csv smhi-opendata_Falun.csv)
+declare -a data=(smhi-opendata_Lulea.csv smhi-opendata_Lund.csv smhi-opendata_Visby.csv smhi-opendata_Umea.csv smhi-opendata_Falsterbo.csv smhi-opendata_Soderarm.csv smhi-openda_Karlstad.csv smhi-opendata_Boras.csv smhi-opendata_Falun.csv)
 
 
 #test list
-declare -a data=(smhi-opendata_Lulea.csv)
+#declare -a data=(smhi-opendata_Lulea.csv)
 
 
 
@@ -69,8 +69,8 @@ for name in "${data[@]}"
 
 	while IFS= read -r line
 	do
-	grep ${line} ${name::-4}/data_${name::-3}txt | cut -d ';' -f 3- | tr -d '\n'  >> ${name::-4}/data_temp_day_${name::-3}txt
-
+	grep ${line} ${name::-4}/data_${name::-3}txt | cut -d ';' -f 3- | tr -d ';G\n'  >> ${name::-4}/data_temp_day_${name::-3}txt
+	echo "\n" >> ${name::-4}/data_temp_day_${name::-3}txt
 	done < ${name::-4}/data_date_${name::-3}txt
 
 	
