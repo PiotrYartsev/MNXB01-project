@@ -71,6 +71,7 @@ for name in "${data[@]}"
 	do
 	grep ${line} ${name::-4}/data_${name::-3}txt | cut -d ';' -f 3- | tr -d ';G\n'  >> ${name::-4}/data_temp_day_${name::-3}txt
 	echo "\n" >> ${name::-4}/data_temp_day_${name::-3}txt
+	
 	done < ${name::-4}/data_date_${name::-3}txt
 
 	

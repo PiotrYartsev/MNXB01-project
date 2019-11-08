@@ -24,3 +24,4 @@ Added day_of_year function to class Date
 Starting to fix the code that calculated the average temp per day
 
 Done with temp per day, took way to long but works fine now
+All day_temp_data for all locations
