@@ -68,8 +68,8 @@ int main(int argc, char *argv[])
 	for (int i = 0; i < indexYear.size() - 1; ++i)
 	{
 		auto minmax = minmax_element(temp.begin() + indexYear.at(i), temp.begin() + indexYear.at(i + 1) - 1);
-		cout << "Coldest temperature for " << date.at(indexYear[i]).get_year() << " year is " << *minmax.first << ", which is at " << date.at(minmax.first - temp.begin()).toString() << "\n";
-		cout << "Hottest temperature for " << date.at(indexYear[i]).get_year() << " year is " << *minmax.second << ", which is at " << date.at(minmax.second - temp.begin()).toString() << "\n";
+		cout << "Coldest temperature for " << date.at(indexYear[i]).get_year() << " year is " << *minmax.first << ", which is at " << date.at(minmax.first - temp.begin()).to_string() << ", day of year " << date.at(minmax.first - temp.begin()).day_of_year() << "\n";
+		cout << "Hottest temperature for " << date.at(indexYear[i]).get_year() << " year is " << *minmax.second << ", which is at " << date.at(minmax.second - temp.begin()).to_string() << ", day of year " << date.at(minmax.second - temp.begin()).day_of_year() << "\n ";
 	}
 
 	//auto minmax = minmax_element(temp.begin(), temp.end());
