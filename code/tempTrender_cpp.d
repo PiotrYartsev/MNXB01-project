@@ -2,6 +2,7 @@
 # DO NOT DELETE
 
 ./tempTrender_cpp.so: tempTrender.h ../dateOfPeakTemp_Upp.cpp ../Date.cpp
+./tempTrender_cpp.so: ../Date.h
 ./tempTrender_cpp.so: /usr/local/Cellar/root/6.18.04/include/root/TH1I.h
 ./tempTrender_cpp.so: /usr/local/Cellar/root/6.18.04/include/root/TH1.h
 ./tempTrender_cpp.so: /usr/local/Cellar/root/6.18.04/include/root/TAxis.h

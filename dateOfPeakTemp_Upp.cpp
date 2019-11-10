@@ -237,6 +237,7 @@ void peak_temp_Upp(ifstream &inFile, int start_year, int mode, int location_spec
                 //num_cold.at(coldest.day_of_year()-1)++;
                 if (hottest.day_of_year() > 100 && hottest.day_of_year() < 300)
                     hist_hot->Fill(hottest.day_of_year());
+                
                 if (coldest.day_of_year() < 100)
                 {
                     hist_cold_1->Fill(coldest.day_of_year());

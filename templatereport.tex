@@ -3,6 +3,7 @@
 \usepackage{amsmath}
 \usepackage{graphicx}
 \usepackage{caption}
+\usepackage{pdfpages}
 \setcounter{tocdepth}{4}
 \setcounter{secnumdepth}{4}
 \setlength\parindent{0pt}
@@ -27,10 +28,56 @@ Piotr Yartsev, Xi-Zhen Liu} % Author name
 
 \section{Program/algorithm}
 
+
 \section{Results}
+\begin{enumerate}
+
+\item Q1
+\item Q2
+\item The warmest and coldest day of each year
+
+The question is to try to find out the possibilites of dates to become the hottest and coldest date. We read the data of Uppsala and then plot the histogram of the occurence for each date being hottest or coldest. 
+
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=8cm]{./images/hotCold_Upp_prev}
+    \caption{first histogram}
+    \label{fig:hist}
+\end{figure}
+
+We noticed some problem:
+\begin{enumerate}
+\item There are some coldest date in summer, and also some hottest date in winter, which isn't make sense.
+\item Winter is distributed at the first and the end of the year, so we use two Gaussian function to fit on those two parts. However, the plot should be circular in practice. We should take both parts into consideration when we draw fit line.
+\end{enumerate}
+Then we figured out the cause of the first problem. Because the Uppsala dataset is a combination of some places around Uppsala. For this question, we ignored those places other than Uppsala. This makes the data became uncomplete. For example, data of 1766 are all from Stockholm after April 5, thus the hottest date in 1766 would be April 4, which does not make sense. To solve this, we only accep coldest days which is less than 100 or more than 300 in day of the year, and hottest days which is between 100 and 300 in day of the year.
+
+To solve the second problem, we extend the length of the x-axis of histogram to 732, twice of a year. Then we just copy the tail to the front, and also the front to the tail. We plot two Gaussian fit lines for coldest date, one at the front and the other one at the end, and these line must be the same. By doing so, we can take all the coldest date into consideration. Finally, we just need to combine all the fit lines in same plot, and only take from day 1 to day 366 and ignore others.
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=8cm]{./images/hotCold_Upp_cold_1}
+    \caption{extended histogram at the begin of the year}
+    \label{fig:hist}
+\end{figure}
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=8cm]{./images/hotCold_Upp_cold_2}
+    \caption{extended histogram at the end of the year}
+    \label{fig:hist}
+\end{figure}
+
+The final histogram:
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=8cm]{./images/hotCold_Upp_final}
+    \caption{final histogram}
+    \label{fig:hist}
+\end{figure}
+\end{enumerate}
+
+
 \section{Discussion}
 
 
 
 \end{document}
-
