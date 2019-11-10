@@ -9,6 +9,7 @@
 \usepackage{siunitx}
 \usepackage{float}
 \begin{document}
+\usepackage{graphicx}
 \title{Weather Report\\\textit{Insights drawn from weather measurements in Sweden} \\ FYTN03}
 \author{Leo Zethraeus, 
 Piotr Yartsev, Xi-Zhen Liu} % Author name
@@ -26,6 +27,10 @@ Piotr Yartsev, Xi-Zhen Liu} % Author name
 
 
 \section{Program/algorithm}
+
+For the program that measures the number of days with a average temperature below 0 each year in Lulea bash was predominately used as it is very good at manipulating strings,  which we thought was very good for this task as after we converted the cvs to a txt file all the files we would deal with in this task would have been txt files with strings.
+
+To extract the data from the cvs we iterated over each line in the file and extracted all lines containing ;G as the G denotes lines that have good data. We remove any characters following the G as it includes text describing the cvs file which we do not need.  
 
 \section{Results}
 \section{Discussion}
