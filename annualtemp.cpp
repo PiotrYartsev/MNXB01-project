@@ -9,7 +9,6 @@ using namespace std;
 	
 double yearly_average(
 int chosen_year, int number_of_columns, int temp_col){
-
 	//Choose path to file
 	std::ifstream inFile("CleanData/datasets/uppsala_tm_1722-2013.dat");
 	if(!inFile) {
@@ -30,31 +29,27 @@ int chosen_year, int number_of_columns, int temp_col){
 	remainder = int(n % number_of_columns);
 	if((year == chosen_year) && (remainder == temp_col)) {
 		temp_sum += num;
-		//cout << "temp: " << num << endl;
 		}
-	//cout << "remainder: " << remainder << endl;
 	if(remainder == 0) {
 	year = int(num);
-	//cout << "year: " << year << endl;
+	
 	if(year == chosen_year)
 	{
 	index++;
 	}
-	//cout << "index: " << index << endl;
+
 	if(year > chosen_year) {
 	break;}
 	}
 	n++;
 	}
-	//cout << "Number of measurements year " << chosen_year << " is: " << index << endl;
+
 	if (index != 0) {
 		average = temp_sum/index;
 	return average;
 	} else {
 	cout << "Year not in data set!" << endl;
 	return 1;}
-	
-	
 }
 
 int output_annual_temp(int first_year, int last_year) {
@@ -93,11 +88,16 @@ int main() {
 	av = count_measurements_per_year(chosen_year, number_of_columns, temp_col);
 	cout << "Yearly average temperature for year " << chosen_year << " is " << setprecision(2) << av << endl;
 	*/
+	//Uncomment below if you want a custom interval.
+	/*
 	cout << "Enter starting year: " << endl;
 	cin >> first_year;
 	cout << "Enter last year: " << endl;
 	cin >> last_year;
+	*/
+	cout << "Computing yearly averages from the Uppsala data set, outputs in CleanData/UppsalaData/annualtemp.txt. The script might take a little while... Drink some coffee." << endl;
 	output_annual_temp(first_year, last_year);
+	cout << "done. Saved to CleanData/UppsalaData/annualtemp.txt." << endl;
 
 	return 0;
 
