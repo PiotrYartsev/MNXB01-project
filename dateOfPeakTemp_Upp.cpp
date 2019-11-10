@@ -329,6 +329,11 @@ void peak_temp_Upp(ifstream &inFile, int start_year, int mode, int location_spec
     cout << "Its uncertainty for Warmest is " << func_2->GetParError(1) << endl;
     can = new TCanvas();
     hist_hot->Draw();
+
+    int binmax = hist_hot->GetMaximumBin(); 
+    double x = hist_hot->GetXaxis()->GetBinCenter(binmax);
+    cout << "hottest" <<x <<endl;
+
     hist_cold_1->Draw("SAME");
     hist_cold_2->Draw("SAME");
     leg->Draw("SAME");

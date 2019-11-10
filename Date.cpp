@@ -57,7 +57,7 @@ int Date::day_of_year()
 {
     if (is_leap())
     {
-        int leapYearDaysByMonth[] = {0, 31, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335};
+        int leapYearDaysByMonth[] = {0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334, 365};
         return leapYearDaysByMonth[month - 1] + day;
     }
     else

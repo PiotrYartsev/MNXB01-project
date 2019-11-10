@@ -21,6 +21,16 @@ Piotr Yartsev, Xi-Zhen Liu} % Author name
 \newpage
 
 \section{Introduction}
+The Swedish Meteorological and Hydrological Institute (SMHI) routinely records the temperature at various locations in Sweden. In some places, this has been going on for hundreds of years. The goal of this project is to find at least three interesting results from the SMHI data. The Data set consists of sssentially these parameters: Time (in format year-month-day-hour:minute), Temperature, longitude, latitude, altitude. We are using C++ and bash script to clean and process the data, then use ROOT to visualize those data and do further analysis. 
+
+The three main questions we are interested in from these measurements are:
+\begin{enumerate}
+\item How the annual average temperature in Uppsala changed since the industrial revolution in Sweden, approx 1880?
+\item How many days a year is the average temperature in Lulea below 0?
+\item Which is the hottest and coldest day most likely to occur in one of the locations in the data set?
+\end{enumerate}
+The report is set up as follows: Chapter 2 is the introduction of some theories we applied to our questions. Chapter 3 we will talk about how the code works, from reading files to generating plots. Chapter 4 would be the answer of our questions, with some plots. In chapter 5 we discuss our result and explain what we have done.
+
 
 \section{Theory}
 
@@ -30,6 +40,21 @@ Piotr Yartsev, Xi-Zhen Liu} % Author name
 
 
 \section{Results}
+\begin{enumerate}
+\item Q1
+\item Q2
+\item The warmest and coldest day of each year
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=8cm]{./images/hotCold_Upp_final}
+    \caption{final histogram}
+    \label{fig:hist}
+\end{figure}
+As the histogram shows, the most likely coldest day is on the end of the year (31/12), and the most likely hottest day is on 13/7.
+
+\end{enumerate}
+
+\section{Discussion}
 \begin{enumerate}
 
 \item Q1
@@ -75,8 +100,6 @@ The final histogram:
 \end{figure}
 \end{enumerate}
 
-
-\section{Discussion}
 
 
 
