@@ -1,6 +1,10 @@
 #include <iostream>
+#include <vector>
+#include <utility>
 #include "tempTrender.h"
 #include "../dateOfPeakTemp_Upp.cpp"
+#include "TH1I.h"
+
 using namespace std;
 
 tempTrender::tempTrender(string filePath) {
@@ -18,7 +22,9 @@ tempTrender::tempTrender(string filePath) {
 }
 
 void tempTrender::hotCold_Upp() {
-	peak_temp(inFile, 1722, 1);
-	
+	int location_specified = 1;
+	int mode = 1;
+	int start_year = 1722;
+	peak_temp(inFile, start_year, mode, location_specified);
 }
 
