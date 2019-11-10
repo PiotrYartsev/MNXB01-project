@@ -4,6 +4,7 @@ using namespace std;
 class Date
 {
 public:
+    Date() {}
     Date(string dateString)
     {
         year = strtol(dateString.substr(0, 4).c_str(), NULL, 10);
@@ -29,17 +30,24 @@ public:
     {
         return month;
     }
+    int get_temp(){
+        return temperature;
+    }
     void set_year(int year)
     {
         this->year = year;
     }
-    void set_day()
+    void set_day(int day)
     {
         this->day = day;
     }
-    void set_month()
+    void set_month(int month)
     {
         this->month = month;
+    }
+    void set_temp(double temp)
+    {
+        temperature = temp;
     }
     string to_string()
     {
@@ -67,4 +75,5 @@ private:
     int year;
     int month;
     int day;
+    double temperature = 0;
 };
