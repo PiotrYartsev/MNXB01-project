@@ -1,3 +1,68 @@
+/*
+ *     Creator: Xi-Zhen Liu
+ *     Email:   xi2645li-s@student.lu.se
+ *
+ *
+ * Description: 
+ *     This script takes an input file, and print the year and the hottest and coldest date. Design for input format of Uppsala.
+ * 
+ * 
+ * Usage:
+ *     ./dateOfPeakTemp [mode]
+ *     For example:
+ *     ./dateOfPeakTemp 1
+ *     Mode:
+ *         1: Daily average temperature according to observations. 
+ *         2: Daily average temperatures corrected for the urban effect.  
+ *
+ *
+ * Methods:  
+ *
+ *     * Gaussian(double *x, double *par)
+ *       - Description:
+ *         * Gaussian function used for fitting histograms
+ * 
+ *     * peak_temp_Upp_old(ifstream &inFile, int start_year, int mode, int location_specified)
+ *       - Description:
+ *         * Original version for plotting histogram. Deprecated.
+ *       - Arguments needed: 
+ *         * inFile: input file
+ *         * start_year: The year the data start
+ *         * mode: 
+ *               1: Daily average temperature according to observations. 
+ *               2: Daily average temperatures corrected for the urban effect.
+ *         * location_specified:
+ *               0: Not speficied
+ *               1: Uppsala
+ *               2: Risinge
+ *               3: Betna
+ *               4: Linköping
+ *               5: Stockholm
+ *               6: Interpolated
+ *
+ * 
+ *     * peak_temp_Upp(ifstream &inFile, int start_year, int mode, int location_specified)
+ *       - Description:
+ *         * In this version, we only use coldest day which is less than 100 or more than 300 in day of the year.
+ *           Similarly, we use hottest day which is between 100 and 300 in day of the year.
+ *           We extend the histogram to start from -182 and end at 549, in order to make the fitting more reasonable.
+ *
+ *       - Arguments needed: 
+ *         * inFile: input file
+ *         * start_year: The year the data start
+ *         * mode: 
+ *               1: Daily average temperature according to observations. 
+ *               2: Daily average temperatures corrected for the urban effect.
+ *         * location_specified:
+ *               0: Not speficied
+ *               1: Uppsala
+ *               2: Risinge
+ *               3: Betna
+ *               4: Linköping
+ *               5: Stockholm
+ *               6: Interpolated
+ *
+ */
 
 #include <iostream>
 #include <fstream>
@@ -10,21 +75,15 @@
 #include "TF1.h"
 #include "TCanvas.h"
 using namespace std;
-/* This script takes an input file, and creates an output with the year and the hottest and coldest date.
-   Design for input format of Uppsala.
-   Usage:
-   ./dateOfPeakTemp [mode]
-   For example:
-   ./dateOfPeakTemp 1
-   Mode:
-   1: Daily average temperature according to observations. 
-   2: Daily average temperatures corrected for the urban effect.
-*/
 
+
+// Gaussian function used for fitting histograms
 double Gaussian(double *x, double *par)
-{ //A custom function
+{
     return par[0] * exp(-0.5 * (x[0] * x[0] - 2 * x[0] * par[1] + par[1] * par[1]) / (par[2] * par[2]));
 }
+
+// Original version for plotting histogram. Deprecated.
 void peak_temp_Upp_old(ifstream &inFile, int start_year, int mode, int location_specified)
 {
     int year = 0;
@@ -120,6 +179,25 @@ void peak_temp_Upp_old(ifstream &inFile, int start_year, int mode, int location_
     can->SaveAs("../image/hotCold_Upp_prev.pdf");
     return;
 }
+
+/* 
+    Plot histogram for hottest and coldest date in Uppsala.
+    Parameters:
+        inFile: input file
+        start_year: The year the data start
+        mode: 
+            1: Daily average temperature according to observations. 
+            2: Daily average temperatures corrected for the urban effect.
+        location_specified:
+            0: Not speficied
+            1: Uppsala
+            2: Risinge
+            3: Betna
+            4: Linköping
+            5: Stockholm
+            6: Interpolated
+
+ */
 void peak_temp_Upp(ifstream &inFile, int start_year, int mode, int location_specified)
 {
     int year = 0;
@@ -224,20 +302,25 @@ void peak_temp_Upp(ifstream &inFile, int start_year, int mode, int location_spec
     leg->SetBorderSize(0);                          //Get rid of the border
     leg->AddEntry(hist_cold_1, "Coldest day", "F"); //Use object title, draw fill
     leg->AddEntry(hist_hot, "Warmest day", "F");    //Use custom title
+
+    // plot histogram for first cold section, range(-182, 184)
     TCanvas *can1 = new TCanvas();
     hist_cold_1->Draw();
     can1->SaveAs("../image/hotCold_Upp_cold_1.pdf");
     can1->Close();
+    // plot histogram for second cold section, range(183, 549)
     TCanvas *can2 = new TCanvas();
     hist_cold_2->Draw();
     can2->SaveAs("../image/hotCold_Upp_cold_2.pdf");
     can2->Close();
+    // plot histogram for hot section, range(1, 366)
     TCanvas *can = new TCanvas();
     hist_hot->Draw();
     can->SaveAs("../image/hotCold_Upp_hot.pdf");
     hist_cold_1->GetListOfFunctions()->Remove(func_1);
     hist_cold_2->GetListOfFunctions()->Remove(func_3);
 
+    // plot histogram for whole year (1, 366), and combined those 3 plots and fit lines
     hist_cold_1->Fit(func_1, "QR", "", 1, 200);
     hist_hot->Fit(func_2, "QR", "", 1, 366);
     hist_cold_2->Fit(func_3, "QR", "", 200, 366);
@@ -253,6 +336,7 @@ void peak_temp_Upp(ifstream &inFile, int start_year, int mode, int location_spec
     return;
 }
 /*
+// Use as standalone execution
 int main(int argc, char *argv[])
 {
     int chosen_year;
