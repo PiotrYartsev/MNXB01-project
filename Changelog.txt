@@ -23,3 +23,5 @@ Added day_of_year function to class Date
 
 Starting to fix the code that calculated the average temp per day
 
+11/10-2019
+Modified some scripts, created another version of movingmeanflexible and did a plotting and predicting root script TempYearPlotandPred.C that can predict temperature in Uppsala for a user input year. And does some nice plotting."
