@@ -28,3 +28,7 @@ Modified some scripts, created another version of movingmeanflexible and did a p
 Done with temp per day, took way to long but works fine now
 All day_temp_data for all locations
 Calculated the average temp each day
+
+11/10-2019
+My script is complete in the map "code" I suggest we all implement our code there (might need to change the paths to data sets if you're using relative paths) and added a folder ProcessedData
+Seems more logical. Also a folder "Plots".
