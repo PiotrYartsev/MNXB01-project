@@ -104,8 +104,8 @@ done < ${name::-4}/day_temp_med_year.txt
 
 
 
-${name::-4}/Final.txt | sed -i '1d;$d' 
- ${name::-4}/data_years_${name::-3}txt| sed -i '1d;$d'
+#sed -i '1d;10d' ${name::-4}/Final.txt 
+#sed -i '1d;10d' ${name::-4}/data_years_${name::-3}txt
 done
 cd ..
 
