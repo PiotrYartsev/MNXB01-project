@@ -10,7 +10,7 @@ using namespace std;
 double yearly_average(
 int chosen_year, int number_of_columns, int temp_col){
 	//Choose path to file
-	std::ifstream inFile("CleanData/datasets/uppsala_tm_1722-2013.dat");
+	std::ifstream inFile("../CleanData/datasets/uppsala_tm_1722-2013.dat");
 	if(!inFile) {
 		std::cout << "Not in file";
 		return 1;
@@ -53,8 +53,9 @@ int chosen_year, int number_of_columns, int temp_col){
 }
 
 int output_annual_temp(int first_year, int last_year) {
+	cout << "Preprocessing data set, this might take a while... Drink some coffee." << endl;
 	int y = first_year;
-	ofstream outFile("CleanData/UppsalaData/annualtemp.txt");
+	ofstream outFile("../ProcessedData/UppsalaData/annualtemp.txt");
 	if(!outFile) {
 		std::cout << "Error" << endl;
 		return 1;
@@ -66,7 +67,7 @@ int output_annual_temp(int first_year, int last_year) {
 	outFile.close();
 	return 0;	
 	}	
-	
+/*	
 int main() {
 	int chosen_year;
 	int number_of_columns = 6;
@@ -94,11 +95,12 @@ int main() {
 	cin >> first_year;
 	cout << "Enter last year: " << endl;
 	cin >> last_year;
-	*/
+	*//*
 	cout << "Computing yearly averages from the Uppsala data set, outputs in CleanData/UppsalaData/annualtemp.txt. The script might take a little while... Drink some coffee." << endl;
 	output_annual_temp(first_year, last_year);
 	cout << "done. Saved to CleanData/UppsalaData/annualtemp.txt." << endl;
 
 	return 0;
+}*/
 
-}
+

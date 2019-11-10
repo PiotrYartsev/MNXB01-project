@@ -11,7 +11,7 @@ double interval_mean(int first_year = 1722, int last_year = 2013) {
 		if (last_year > 2013) {cout << "Too late! Only measurements before 2013 available." << endl; return 1;}
 		
 		ifstream inFile;
-		inFile.open("CleanData/UppsalaData/annualtemp.txt", ios::in);
+		inFile.open("../ProcessedData/UppsalaData/annualtemp.txt", ios::in);
 		double num = 0;
 		double remainder = 0;
 		double temp_sum = 0;
@@ -39,14 +39,14 @@ double interval_mean(int first_year = 1722, int last_year = 2013) {
 			
 }
 
-int moving_mean_all(int first_year, int last_year, int box_interval, bool save_output = 0) {
+int moving_mean_all(int first_year, int last_year, int box_interval) {
 	int year = first_year;
 	int length = int((last_year-first_year)/box_interval);
 	cout << "length: " << length << endl;
 	double arr[length];
 	int k = 0;
 	
-	ofstream outFile2("CleanData/UppsalaData/movingboxmeantemp.txt");	
+	ofstream outFile2("../ProcessedData/UppsalaData/movingboxmeantemp.txt");	
 		if(!outFile2) {
 			std::cout << "Error" << endl;
 			return 1;
@@ -59,9 +59,9 @@ int moving_mean_all(int first_year, int last_year, int box_interval, bool save_o
 		arr[k] = interval_mean(first_year, year);
 		cout << "entry: " << k << " temp: " << arr[k] << endl;//" year: " << year << endl;
 		
-		if(save_output){
-			outFile2 << first_year << " " << year << " " << setprecision(2) << arr[k] << endl;
-			}
+		
+		outFile2 << first_year << " " << year << " " << setprecision(2) << arr[k] << endl;
+			
 		k++;		
 		}
 		outFile2.close();
@@ -69,7 +69,7 @@ int moving_mean_all(int first_year, int last_year, int box_interval, bool save_o
 		return 0;
 		
 }
-
+/*
 int main() {
 	//Choose first year, last year and box_interval for the moving mean.
 	int first_year = 1722;
@@ -88,7 +88,8 @@ int main() {
 		
 	moving_mean_all(first_year, last_year, box_interval, save_output);
 	cout << "Program terminated succesfully." << endl;
-	cout << "Output stored in CleanData/UppsalaData/movingboxmeantemp.txt" << endl;
+	cout << "Output stored in ProcessedData/UppsalaData/movingboxmeantemp.txt" << endl;
 	
 	return 0;
 }
+*/
