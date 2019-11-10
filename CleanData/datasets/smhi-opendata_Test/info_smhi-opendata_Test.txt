@@ -1,9 +1,0 @@
-"Stationsnamn;Klimatnummer;Mäthöjd (meter över marken)"
-Falun-Lugnet;105370;2.0
-
-Parameternamn;Beskrivning;Enhet
-Lufttemperatur;momentanvärde
-
-"Tidsperiod (fr.o.m);Tidsperiod (t.o.m);Höjd (meter över havet);Latitud (decimalgrader);Longitud (decimalgrader)"
-"2006-06-01 00:00:00;2015-11-30 23:59:59;140.0;60.619;15.6603"
-"1983-03-01 00:00:00;2006-01-12 23:59:59;160.0;60.6219;15.6235"

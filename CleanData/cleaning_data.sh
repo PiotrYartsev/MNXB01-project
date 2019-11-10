@@ -5,9 +5,6 @@
 
 
 #test list
-#declare -a data=(smhi-opendata_Test.csv)
-
-#test list
 declare -a data=(smhi-opendata_Lulea.csv )
 
 
@@ -27,10 +24,6 @@ for name in "${data[@]}"
 	touch ${name::-4}/data_${name::-3}txt
 	#create a textfile for storing information about the data
 	touch ${name::-4}/info_${name::-3}txt
- 
-	#Put top 9 lines, containing all of the information about the data
-	#FIX THIS
-	head -n 9 ${name} >> ${name::-4}/info_${name::-3}txt
 
 	#for each line in cvs
 	while IFS=, read -r field1 
@@ -52,7 +45,6 @@ for name in "${data[@]}"
 	
 	
 	touch ${name::-4}/data_date_${name::-3}txt
-
 	#extract date, time and temp from cvs
 	touch ${name::-4}/data_temp_${name::-3}txt
 	while IFS=';' read -r one two three four
@@ -65,7 +57,6 @@ for name in "${data[@]}"
 	
 	#removes duplicate dates from ${name::-4}/data_date_${name::-3}txt
 	sed -i -n '$!N; /^\(.*\)\n\1$/!P; D' ${name::-4}/data_date_${name::-3}txt
-	
 	
 	#find the temperture measurment each day 
 	touch ${name::-4}/data_temp_day_${name::-3}txt
@@ -86,37 +77,6 @@ for name in "${data[@]}"
 	fi
 	echo "test"
 	
-	
-	
-	
-#use c++ code that does stuff
-	cd ..
-	if [ -f input.txt ]; then
-	   rm -r input txt
-	fi
-		if [ -f day_temp_med.txt ]; then
-	   rm -r day_temp_med.txt
-	fi
-	touch input.txt
-	echo datasets/${name::-4}/data_temp_day_${name::-3}txt >> input.txt
-	g++ average_day_temp.cpp -o a.out
-	./a.out < input.txt > day_temp_med.txt
-	rm input.txt
-	cd datasets/
-
-
-
-
-#find the temperture measurment each year
-	while IFS= read -r line
-	do
-	echo ${line:0:3} >> day_temp_med.txt
-done < ${name::-4}/data_date_${name::-3}txt
-
-
-
-	
-
 
 done
 cd ..
