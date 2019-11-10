@@ -39,6 +39,21 @@ double interval_mean(int first_year = 1722, int last_year = 2013) {
 			
 }
 
+//Can save the result to an output file with three columns, first year, last year, mean_temp.
+int create_output(int first_year, int last_year, double result) {
+	
+	ofstream outFile("CleanData/UppsalaData/intervalmeantemp.txt");
+	
+	if(!outFile) {
+		std::cout << "Error" << endl;
+		return 1;
+		}
+	
+	outFile << first_year << " " << last_year << " " << setprecision(2) << result << endl;
+	outFile.close();
+	return 0;
+}
+
 int moving_mean_all(int first_year, int last_year, int box_interval, bool save_output = 0) {
 	int year = first_year;
 	int length = int((last_year-first_year)/box_interval);
@@ -71,24 +86,39 @@ int moving_mean_all(int first_year, int last_year, int box_interval, bool save_o
 }
 
 int main() {
-	//Choose first year, last year and box_interval for the moving mean.
-	int first_year = 1722;
-	int last_year = 2013;
-	int box_interval = 5;
+	int first_year, last_year;
+	int box_interval = 1;
+	bool input = 0;
 	double result = 0.;
-	//1 saves output.
-	bool save_output = 1;
+	bool save_output = 0;
 	bool box_mean = 0;
 	
+	cout << "Enter first year: " << endl;
+	cin >> first_year;
+	if (first_year < 1722) {cout << "Too early! Only measurements after 1722 available." << endl; return 1;}
+	cout << "Enter last year: " << endl;
+	cin >> last_year;
+	if (last_year > 2013) {cout << "Too late! Only measurements before 2013 available." << endl; return 1;}
 	
 	result = interval_mean(first_year, last_year);
 	cout << "Average temperature between " << first_year << " and " << last_year << " is: "  << setprecision(2) << result << endl;
-	cout << "Commencing moving mean calculation between " << first_year << " and " << last_year << "." << endl;
+	cout << "Save to output file? Type 1 for yes or 0 for no. " << endl;
+	cin >> input;
+	if(input) {create_output(first_year,last_year, result);
+				cout << "Single mean temperature between " << first_year << " and " << last_year << " saved." << endl;}
+	cout << "Proceed to calculate moving mean? Type 1 for yes or 0 for no." << endl;
+	cin >> box_mean;
 	
+	if(box_mean){
+		cout << "Commencing moving mean calculation between " << first_year << " and " << last_year << "." << endl;
 		
-	moving_mean_all(first_year, last_year, box_interval, save_output);
-	cout << "Program terminated succesfully." << endl;
-	cout << "Output stored in CleanData/UppsalaData/movingboxmeantemp.txt" << endl;
-	
+		cout << "Select box interval: " << endl;
+		cin >> box_interval;
+		cout << "Interval chosen: " << box_interval << endl;
+		cout << "Save output as movingboxmeantemp.txt? Type 1 for yes 0 for no." << endl;
+		cin >> save_output;
+		
+		moving_mean_all(first_year, last_year, box_interval, save_output);
+	}
 	return 0;
 }
