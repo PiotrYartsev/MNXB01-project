@@ -35,3 +35,7 @@ Added temparature member to class Date
 
 Calculated the average temp each day
 
+Draw 3 different hist with different range for Gaussian fit
+
+Added some comment in dateOfPeakTemp_Upp.cpp
+Created Date.h
