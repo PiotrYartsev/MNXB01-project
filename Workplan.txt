@@ -5,7 +5,7 @@ The three main questions we are interested in from these measurements are:
 
 1. How the annual average temperature in Uppsala changed since the industrial revolution in Sweden, approx 1880?
 
-2. How does the length of winter, according to SMHI's metereological definition of winter, change with latitude?
+2. How many days a year is the average temperature in Lulea below 0?
 
 3. Which is the hottest and coldest day most likely to occur in one of the locations in the data set, for example Lund?
 

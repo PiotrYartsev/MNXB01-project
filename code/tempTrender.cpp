@@ -1,32 +1,31 @@
 #include <iostream>
+#include <vector>
+#include <utility>
 #include "tempTrender.h"
+#include "../dateOfPeakTemp_Upp.cpp"
+#include "TH1I.h"
 
-// include C++ STL headers 
-#include <iostream>
-#include <fstream>
-#include <iomanip>
 using namespace std;
-
-// ROOT library obejcts
-#include <TF1.h> // 1d function class
-#include <TH1.h> // 1d histogram classes
-#include <TH2.h> // 1d histogram classes
-#include <TStyle.h>  // style object
-#include <TMath.h>   // math functions
-#include <TCanvas.h> // canvas object
-#include <TString.h>
-#include <TRandom.h>
-#include <TGraph.h>
-#include <TGaxis.h>
-#include <TLegend.h>
-
-#include "annualtemp.cpp"
-#include "movingmean.cpp"
-#include "tempYearplotandpred.cpp"
 
 tempTrender::tempTrender(string filePath) {
 	cout << "The user supplied " << filePath << " as the path to the data file." << endl;
-	cout << "You should probably store this information in a member variable of the class. Good luck with the project! :)" << endl;
+	//cout << "You should probably store this information in a member variable of the class. Good luck with the project! :)" << endl;
+    ifstream inFile(filePath);
+	if (!inFile)
+    {
+        std::cout << "No such file";
+		return;
+    }
+	else{
+		this->inFile.swap(inFile);
+	}
+}
+
+void tempTrender::hotCold_Upp() {
+	int location_specified = 1;
+	int mode = 1;
+	int start_year = 1722;
+	peak_temp(inFile, start_year, mode, location_specified);
 }
 
 /* 
@@ -53,9 +52,4 @@ void tempTrender::tempPerYear(int yearToExtrapolate){
 	
 	tempYearplotandpred(yearToExtrapolate);	
 	}
-	
-
-
-
-
 

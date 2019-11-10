@@ -15,11 +15,12 @@
 using namespace std;
 
 
-
 int main(){
-string Input;
-	std::cin >> Input;
-std::ifstream File(Input.c_str());
+int i=0;
+int n=65;
+double x[n];
+
+std::ifstream File("CleanData/datasets/smhi-opendata_Lulea/data_years_smhi-opendata_Lulea.txt");
 if(!File){
 		std::cout << "Not in file \n";
 		return 1;
@@ -27,19 +28,26 @@ if(!File){
 }
 for( std::string line; getline( File, line ); )
 {
-double number=0;
-int i=0;
-stringstream str(line);
-string s;
-while (std::getline(str, s,';')){
-
-double ss = atof(s.c_str());
-number=number+ss;
+x[i]=atof(line.c_str());
+std::cout << x[i];
 i++;
 }
-std::cout << number/i <<"\n";
+File.close();
+
+
+int l=0;
+double y[n];
+
+std::ifstream Filetwo("CleanData/datasets/smhi-opendata_Lulea/Final.txt");
+
+for( std::string line; getline( Filetwo, line ); )
+{
+y[l]=atof(line.c_str());
+l++;
 }
+Filetwo.close();
 }
+
 
 
 
