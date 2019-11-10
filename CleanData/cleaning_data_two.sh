@@ -4,8 +4,6 @@
 #declare -a data=(smhi-opendata_Lulea.csv smhi-opendata_Lund.csv smhi-opendata_Visby.csv smhi-opendata_Umea.csv smhi-opendata_Falsterbo.csv smhi-opendata_Soderarm.csv smhi-openda_Karlstad.csv smhi-opendata_Boras.csv smhi-opendata_Falun.csv)
 
 
-#test list
-#declare -a data=(smhi-opendata_Test.csv)
 
 #test list
 declare -a data=(smhi-opendata_Lulea.csv )
@@ -106,6 +104,13 @@ done < ${name::-4}/day_temp_med_year.txt
 
 
 
+${name::-4}/Final.txt | sed -i '1d;$d' 
+ ${name::-4}/data_years_${name::-3}txt| sed -i '1d;$d'
 done
 cd ..
+
+
+
+root .x graph.C
+.q
 echo "done"
