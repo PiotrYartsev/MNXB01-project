@@ -25,6 +25,12 @@ void tempTrender::hotCold_Upp() {
 	int location_specified = 1;
 	int mode = 1;
 	int start_year = 1722;
-	peak_temp(inFile, start_year, mode, location_specified);
+	peak_temp_Upp(inFile, start_year, mode, location_specified);
 }
 
+void tempTrender::hotCold(){
+	int location_specified = 1;
+	int mode = 1;
+	int start_year = 1722;
+	peak_temp_Upp(inFile, start_year, mode, location_specified);
+}
