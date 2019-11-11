@@ -107,14 +107,17 @@ double tempYearplotandpred(Int_t input_year)
 	  fitFunc->SetName("Fitted function");
 	  totalTemp->Fit(fitFunc);
 	  double extratemp = fitFunc->Eval(input_year) + total_mean;
-	  
-	  cout << "Extrapolating to year " << input_year << ": " << fixed << setprecision(4)<<extratemp<< " celsius."<< endl;
+	  cout << endl;
+	  //Output the reduced chi-square of the fitted fourth degree polynomial and return the extrapolated temperature:
+	  cout << "Reduced Chi² from fit: " << (fitFunc->GetChisquare()/fitFunc->GetNDF()) << endl;
+	  cout << endl;
+	  cout << "Extrapolating to year " << input_year << ": " << fixed << setprecision(1)<<extratemp<< " celsius."<< endl << endl;
 	  
 	  
 	  
 		
 		TCanvas* c1 = new TCanvas("c1", "Annual average temperature in Uppsala", 900, 600);
-		TGaxis *y_axis = new TGaxis(first_year,-4,first_year,4, -4+total_mean, 4+total_mean, 510);
+		TGaxis *y_axis = new TGaxis(first_year,-4,first_year,4, -7+total_mean, 7+total_mean, 510);
 		
 		upTemp->GetYaxis()->SetLabelSize(0.3);
 
@@ -126,11 +129,15 @@ double tempYearplotandpred(Int_t input_year)
 		downTemp->SetFillColor(kBlue);
 		downTemp->Draw("SAME");
 		fitFunc->Draw("SAME");
+		
+		y_axis->SetLabelSize(0.04);
+		y_axis->SetNdivisions(19);
 		y_axis->Draw();
-		TLegend* legend = new TLegend(0.5,0.8,0.88,0.9);
+		TLegend* legend = new TLegend(0.5,0.8,0.88,0.95);
 	    legend->AddEntry(upTemp,"Temperature above average","f");
 	    legend->AddEntry(downTemp,"Temperature below average","f");
 	    legend->AddEntry("Fitted function","Fitted pol4","l");
+	    legend->SetTextSize(0.025);
 	    legend->Draw();
 	   
 	// Below code creates a nice graph for the moving mean with box_interval 5 years.
@@ -174,10 +181,8 @@ double tempYearplotandpred(Int_t input_year)
 		legend->AddEntry("Moving Mean,10","Moving Mean, 10-year interval","l");
 		
 		  // Save the canvas as a picture
+		
 		c1->SaveAs("../Plots/tempYear.png");
-
-		//Output the reduced chi-square of the fitted fourth degree polynomial and return the extrapolated temperature:
-		cout << "Reduced Chi²: " << (fitFunc->GetChisquare()/fitFunc->GetNDF()) << endl;
 		return extratemp;
 		
 	}
