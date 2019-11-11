@@ -1,5 +1,4 @@
 #include <iostream>
-<<<<<<< HEAD
 #include "tempTrender.h"
 
 // include C++ STL headers 
@@ -21,9 +20,16 @@ using namespace std;
 #include <TGaxis.h>
 #include <TLegend.h>
 
+//For the tempPerYear(int) function
 #include "annualtemp.cpp"
-#include "movingmean.cpp"
 #include "tempYearplotandpred.cpp"
+
+//For the HotCold() functions
+#include <vector>
+#include <utility>
+//#include "../dateOfPeakTemp_Upp.cpp" Fix before we can uncomment.
+#include "TH1I.h"
+
 
 tempTrender::tempTrender(string filePath) {
 	cout << "The user supplied " << filePath << " as the path to the data file." << endl;
@@ -32,7 +38,7 @@ tempTrender::tempTrender(string filePath) {
 
 /* 
 Root function to plot histograms of the annual average temperatures from the annualtemp.txt data set, and to extrapolate temperature to a year given by user input.
-* Make sure to run annualtemp.cpp and movingmean.cpp first, in that order.
+* Make sure to run annualtemp.cpp first, or just call project() if rootlogon.C works as it should.
 * By: Leo Zethraeus
 */
 
@@ -53,22 +59,11 @@ void tempTrender::tempPerYear(int yearToExtrapolate){
 		movingmeanfile.close();
 	
 	tempYearplotandpred(yearToExtrapolate);	
-	}
+}
 	
 
 
-
-
-
-=======
-#include <vector>
-#include <utility>
-#include "tempTrender.h"
-#include "../dateOfPeakTemp_Upp.cpp"
-#include "TH1I.h"
-
-using namespace std;
-
+/* Does not work with all root/and or ubuntu versions. Needs to be fixed.
 tempTrender::tempTrender(string filePath) {
 	cout << "The user supplied " << filePath << " as the path to the data file." << endl;
 	//cout << "You should probably store this information in a member variable of the class. Good luck with the project! :)" << endl;
@@ -82,7 +77,9 @@ tempTrender::tempTrender(string filePath) {
 		this->inFile.swap(inFile);
 	}
 }
+*/
 
+/*Fix before we can proceed.
 // To set and plot the histogram for hottest and coldest date in Uppsala.
 void tempTrender::hotCold_Upp() {
 	int location_specified = 1;
@@ -98,4 +95,4 @@ void tempTrender::hotCold(){
 	int start_year = 1722;
 	peak_temp_Upp(inFile, start_year, mode, location_specified);
 }
->>>>>>> 32c010efe60d2a4697a5e85f8946d897d068a1cd
+*/
