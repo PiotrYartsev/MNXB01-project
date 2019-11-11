@@ -3,7 +3,9 @@
 #include <fstream>
 #include <iomanip>
 using namespace std;
-/*This script takes an input file, and creates an output with the year and the mean temperature that year separated by space.
+/*This script contains two functions, yearly_average: Takes an input file, and creates an output with the year and the mean temperature that year separated by space. 
+ * and the function output_annual_temp that outputs the result for all the years in the data set.
+ * 
  * Check the format of the Uppsala file. If you want to change the column to average, just change temp_col, and the number_of_columns, if applied to another dataset.
  * NOTE: It only works in the format year something temperature something, not with dates (1977 is ok but 1972-07-01 is not) or columns separated by commas.*/
 	
@@ -66,41 +68,6 @@ int output_annual_temp(int first_year, int last_year) {
 	}
 	outFile.close();
 	return 0;	
-	}	
-/*	
-int main() {
-	int chosen_year;
-	int number_of_columns = 6;
-	int temp_col = 4;
-	double av = 0;
-	int first_year = 1722;
-	int last_year = 2013;
-	//Uncomment this if you want to change the number of columns (i.e. if using a different, but still compatible dataset):
-	/*cout << "Please enter the number of columns, this will only work for complete datasets: " << endl;
-	cin >> number_of_columns;
-	cout << "Please specify column to average (first is 0, last is " << (number_of_columns-1) << "): " << endl;
-	cin >> temp_col;
-	*/
-	
-	//Uncomment this if you want the temp for a specific year:
-	/*cout << "Enter chosen year to count measurements: " << endl;
-	cin >> chosen_year;	
-
-	av = count_measurements_per_year(chosen_year, number_of_columns, temp_col);
-	cout << "Yearly average temperature for year " << chosen_year << " is " << setprecision(2) << av << endl;
-	*/
-	//Uncomment below if you want a custom interval.
-	/*
-	cout << "Enter starting year: " << endl;
-	cin >> first_year;
-	cout << "Enter last year: " << endl;
-	cin >> last_year;
-	*//*
-	cout << "Computing yearly averages from the Uppsala data set, outputs in CleanData/UppsalaData/annualtemp.txt. The script might take a little while... Drink some coffee." << endl;
-	output_annual_temp(first_year, last_year);
-	cout << "done. Saved to CleanData/UppsalaData/annualtemp.txt." << endl;
-
-	return 0;
-}*/
+}
 
 
