@@ -307,17 +307,17 @@ void peak_temp_Upp(ifstream &inFile, int start_year, int mode, int location_spec
     // plot histogram for first cold section, range(-182, 184)
     TCanvas *can1 = new TCanvas();
     hist_cold_1->Draw();
-    can1->SaveAs("../image/hotCold_Upp_cold_1.pdf");
+    can1->SaveAs("../images/hotCold_Upp_cold_1.pdf");
     can1->Close();
     // plot histogram for second cold section, range(183, 549)
     TCanvas *can2 = new TCanvas();
     hist_cold_2->Draw();
-    can2->SaveAs("../image/hotCold_Upp_cold_2.pdf");
+    can2->SaveAs("../images/hotCold_Upp_cold_2.pdf");
     can2->Close();
     // plot histogram for hot section, range(1, 366)
     TCanvas *can = new TCanvas();
     hist_hot->Draw();
-    can->SaveAs("../image/hotCold_Upp_hot.pdf");
+    can->SaveAs("../images/hotCold_Upp_hot.pdf");
     hist_cold_1->GetListOfFunctions()->Remove(func_1);
     hist_cold_2->GetListOfFunctions()->Remove(func_3);
 
@@ -327,17 +327,13 @@ void peak_temp_Upp(ifstream &inFile, int start_year, int mode, int location_spec
     hist_cold_2->Fit(func_3, "QR", "", 200, 366);
     cout << "The mean for Warmest is " << func_2->GetParameter(1) << endl;
     cout << "Its uncertainty for Warmest is " << func_2->GetParError(1) << endl;
+    
     can = new TCanvas();
     hist_hot->Draw();
-
-    int binmax = hist_hot->GetMaximumBin(); 
-    double x = hist_hot->GetXaxis()->GetBinCenter(binmax);
-    cout << "hottest" <<x <<endl;
-
     hist_cold_1->Draw("SAME");
     hist_cold_2->Draw("SAME");
     leg->Draw("SAME");
-    can->SaveAs("../image/hotCold_Upp_final.pdf");
+    can->SaveAs("../images/hotCold_Upp_final.pdf");
     can->Close();
     return;
 }
