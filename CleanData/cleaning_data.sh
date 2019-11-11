@@ -5,13 +5,10 @@
 
 
 #test list
-#declare -a data=(smhi-opendata_Test.csv)
-
-#test list
 declare -a data=(smhi-opendata_Lulea.csv )
 
 
-cd datasets/
+cd Cleandata/datasets/
 
 for name in "${data[@]}"
 	do
@@ -27,10 +24,6 @@ for name in "${data[@]}"
 	touch ${name::-4}/data_${name::-3}txt
 	#create a textfile for storing information about the data
 	touch ${name::-4}/info_${name::-3}txt
- 
-	#Put top 9 lines, containing all of the information about the data
-	#FIX THIS
-	head -n 9 ${name} >> ${name::-4}/info_${name::-3}txt
 
 	#for each line in cvs
 	while IFS=, read -r field1 
@@ -52,7 +45,6 @@ for name in "${data[@]}"
 	
 	
 	touch ${name::-4}/data_date_${name::-3}txt
-
 	#extract date, time and temp from cvs
 	touch ${name::-4}/data_temp_${name::-3}txt
 	while IFS=';' read -r one two three four
@@ -65,7 +57,6 @@ for name in "${data[@]}"
 	
 	#removes duplicate dates from ${name::-4}/data_date_${name::-3}txt
 	sed -i -n '$!N; /^\(.*\)\n\1$/!P; D' ${name::-4}/data_date_${name::-3}txt
-	
 	
 	#find the temperture measurment each day 
 	touch ${name::-4}/data_temp_day_${name::-3}txt
@@ -85,11 +76,39 @@ for name in "${data[@]}"
 	exit 1
 	fi
 	echo "test"
+
+#remove files if they already exist
+if [ -f ${name::-4}/data_years_${name::-3}txt ]; then
+	   rm -f ${name::-4}/data_years_${name::-3}txt
+	   echo "Deleted ${name::-4}/data_years_${name::-3}txt"
+fi	
 	
-	
-	
-	
-#use c++ code that does stuff
+if [ -f ${name::-4}/day_temp_med.txt ]; then
+	   rm -f ${name::-4}/day_temp_med.txt
+	   echo "Deleted ${name::-4}/day_temp_med.txt"
+fi
+
+if [ -f ${name::-4}/day_temp_med_day.txt ]; then
+	   rm -f ${name::-4}/day_temp_med_day.txt
+	   echo "Deleted ${name::-4}/day_temp_med_day.txt"
+fi
+
+if [ -f ${name::-4}/day_temp_med_year.txt ]; then
+	   rm -f ${name::-4}/day_temp_med_year.txt
+	   echo "Deleted ${name::-4}/day_temp_med_year.txt"
+fi
+
+if [ -f ${name::-4}/Final.txt ]; then
+	   rm -f ${name::-4}/Final.txt
+	   echo "Deleted ${name::-4}/Final.txt"
+fi	
+
+if [ -f ${name::-4}/Final_final.txt ]; then
+	   rm -f ${name::-4}/Final_final.txt
+	   echo "Deleted ${name::-4}/Final_final.txt"
+fi	
+
+#use c++ code that does calculates the average temp each day
 	cd ..
 	if [ -f input.txt ]; then
 	   rm -r input txt
@@ -97,27 +116,63 @@ for name in "${data[@]}"
 		if [ -f day_temp_med.txt ]; then
 	   rm -r day_temp_med.txt
 	fi
+	sed -i s/\\n\"//g ${name::-4}/data_temp_day_${name::-3}txt 
 	touch input.txt
 	echo datasets/${name::-4}/data_temp_day_${name::-3}txt >> input.txt
 	g++ average_day_temp.cpp -o a.out
-	./a.out < input.txt > day_temp_med.txt
+	./a.out < input.txt > datasets/${name::-4}/day_temp_med.txt
 	rm input.txt
 	cd datasets/
 
+#compere if number of days match number of temperatures 
+if [ "$(wc -l < ${name::-4}/day_temp_med.txt)" -gt "$(wc -l < ${name::-4}/data_temp_day_${name::-3}txt)" ];then
+	echo -e "Days and daily temp don't match, everything is on fire"
+	echo -e "$(wc -l < ${name::-4}/day_temp_med.txt)"
+	echo -e "$(wc -l < ${name::-4}/data_temp_day_${name::-3}txt)"
+	exit 1
+	fi
 
 
 
-#find the temperture measurment each year
-	while IFS= read -r line
+#make a list of years
+while IFS= read -r line
 	do
-	echo ${line:0:3} >> day_temp_med.txt
+	echo ${line:0:4} >> ${name::-4}/data_years_${name::-3}txt
 done < ${name::-4}/data_date_${name::-3}txt
 
+# Add dates to daily average
+paste ${name::-4}/day_temp_med.txt ${name::-4}/data_date_${name::-3}txt > ${name::-4}/day_temp_med_day.txt
+echo " \n" >> ${name::-4}/day_temp_med_day.txt
 
+touch ${name::-4}/day_temp_med_year.txt
+chmod 777 ${name::-4}/day_temp_med_year.txt
+echo "start"
 
+#removes duplicate dates from ${name::-4}/data_date_${name::-3}txt
+sed -i '$!N; /^\(.*\)\n\1$/!P; D' ${name::-4}/data_years_${name::-3}txt
+
+#add date infront of each temperature 
+while IFS= read -r line
+	do
+	echo -e "${line} " >> ${name::-4}/day_temp_med_year.txt
+grep $line ${name::-4}/day_temp_med_day.txt | while read -r linetwo ; do
 	
+	truncate --size -1 ${name::-4}/day_temp_med_year.txt
+	echo -e $linetwo | cut -d ' ' -f 1 >> ${name::-4}/day_temp_med_year.txt
+done
+done < ${name::-4}/data_years_${name::-3}txt
+	
+#count the number of instances for each year where the daily average temperature was below 0
+while IFS= read -r line
+	do
+echo $line | grep -o "-" | wc -l >> ${name::-4}/Final.txt
+done < ${name::-4}/day_temp_med_year.txt
 
 
 done
 cd ..
+
+
+root .x graph.C
+.q
 echo "done"

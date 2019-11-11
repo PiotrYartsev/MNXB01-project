@@ -10,6 +10,7 @@
 \usepackage{siunitx}
 \usepackage{float}
 \begin{document}
+\usepackage{graphicx}
 \title{Weather Report\\\textit{Insights drawn from weather measurements in Sweden} \\ FYTN03}
 \author{Leo Zethraeus, 
 Piotr Yartsev, Xi-Zhen Liu} % Author name
@@ -37,6 +38,12 @@ The report is set up as follows: Chapter 2 is the introduction of some theories 
 
 
 \section{Program/algorithm}
+
+For the program that measures the number of days with a average temperature below 0 each year in Lulea bash was predominately used as it is very good at manipulating strings,  which we thought was very good for this task as after we converted the cvs to a txt file all the files we would deal with in this task would have been txt files with strings.
+
+To extract the data from the cvs we iterated over each line in the file and extracted all lines containing ;G as the G denotes lines that have good data. We remove any characters following the G as it includes text describing the cvs file which we do not need.  
+
+
 
 
 \section{Results}
@@ -76,6 +83,13 @@ We noticed some problem:
 \item Winter is distributed at the first and the end of the year, so we use two Gaussian function to fit on those two parts. However, the plot should be circular in practice. We should take both parts into consideration when we draw fit line.
 \end{enumerate}
 Then we figured out the cause of the first problem. Because the Uppsala dataset is a combination of some places around Uppsala. For this question, we ignored those places other than Uppsala. This makes the data became uncomplete. For example, data of 1766 are all from Stockholm after April 5, thus the hottest date in 1766 would be April 4, which does not make sense. To solve this, we only accep coldest days which is less than 100 or more than 300 in day of the year, and hottest days which is between 100 and 300 in day of the year.
+
+
+
+
+The graph from the problem where we calculated the nummber of days that had average temperature bellow 0 clearly shows some anomaly in the first few point. It has to do with bad data. The cvs file denoted the quality of the with G for good and bad with Y 
+
+
 
 To solve the second problem, we extend the length of the x-axis of histogram to 732, twice of a year. Then we just copy the tail to the front, and also the front to the tail. We plot two Gaussian fit lines for coldest date, one at the front and the other one at the end, and these line must be the same. By doing so, we can take all the coldest date into consideration. Finally, we just need to combine all the fit lines in same plot, and only take from day 1 to day 366 and ignore others.
 \begin{figure}[htp]
