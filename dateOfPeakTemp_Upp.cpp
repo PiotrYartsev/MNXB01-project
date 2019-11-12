@@ -74,6 +74,8 @@
 #include "TLegend.h"
 #include "TF1.h"
 #include "TCanvas.h"
+#include <TROOT.h>
+#include <TStyle.h>
 using namespace std;
 
 
@@ -110,7 +112,7 @@ void peak_temp_Upp_old(ifstream &inFile, int start_year, int mode, int location_
     while (!inFile.eof())
     {
         inFile >> year >> month >> day >> temp1 >> temp2 >> location;
-        //cout << year<< month <<day << temp1 << temp2 << location<< endl;
+        cout << year<< month <<day << temp1 << temp2 << location<< endl;
         if (location == location_specified || location_specified == 0)
         {
             if (year > start_year)
@@ -200,6 +202,7 @@ void peak_temp_Upp_old(ifstream &inFile, int start_year, int mode, int location_
  */
 void peak_temp_Upp(ifstream &inFile, int start_year, int mode, int location_specified)
 {
+	gStyle->SetOptFit(0);
     int year = 0;
     int month = 0;
     int day = 0;
@@ -305,22 +308,23 @@ void peak_temp_Upp(ifstream &inFile, int start_year, int mode, int location_spec
     leg->AddEntry(hist_hot, "Warmest day", "F");    //Use custom title
 
     // plot histogram for first cold section, range(-182, 184)
-    TCanvas *can1 = new TCanvas();
-    hist_cold_1->Draw();
-    can1->SaveAs("../images/hotCold_Upp_cold_1.pdf");
-    can1->Close();
-    // plot histogram for second cold section, range(183, 549)
-    TCanvas *can2 = new TCanvas();
-    hist_cold_2->Draw();
-    can2->SaveAs("../images/hotCold_Upp_cold_2.pdf");
-    can2->Close();
-    // plot histogram for hot section, range(1, 366)
     TCanvas *can = new TCanvas();
+    hist_cold_1->Draw();
+    can->SaveAs("../images/hotCold_Upp_cold_1.pdf");
+    can->Close();
+    // plot histogram for second cold section, range(183, 549)
+    can = new TCanvas();
+    hist_cold_2->Draw();
+    can->SaveAs("../images/hotCold_Upp_cold_2.pdf");
+    can->Close();
+    // plot histogram for hot section, range(1, 366)
+    can = new TCanvas();
     hist_hot->Draw();
     can->SaveAs("../images/hotCold_Upp_hot.pdf");
+    can->Close();
+
     hist_cold_1->GetListOfFunctions()->Remove(func_1);
     hist_cold_2->GetListOfFunctions()->Remove(func_3);
-
     // plot histogram for whole year (1, 366), and combined those 3 plots and fit lines
     hist_cold_1->Fit(func_1, "QR", "", 1, 200);
     hist_hot->Fit(func_2, "QR", "", 1, 366);
