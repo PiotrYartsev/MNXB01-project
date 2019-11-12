@@ -5,6 +5,7 @@
 #include <iostream>
 #include <fstream>
 #include <iomanip>
+#include <cstring>
 using namespace std;
 
 // ROOT library obejcts
@@ -27,22 +28,27 @@ using namespace std;
 //For the HotCold() functions
 #include <vector>
 #include <utility>
-#include "../dateOfPeakTemp_Upp.cpp" //Fix before we can uncomment.
+#include "dateOfPeakTemp_Upp.cpp" //Fix before we can uncomment.
 #include "TH1I.h"
 
 
 tempTrender::tempTrender(string filePath) {
 	cout << "The user supplied " << filePath << " as the path to the data file." << endl;
 	cout << "You should probably store this information in a member variable of the class. Good luck with the project! :)" << endl;
-	ifstream inFile(filePath);
+	this->filePath = filePath;
+	/*
+	ifstream inFile(filePath.c_str());
 	if (!inFile)
     {
         std::cout << "No such file";
 		return;
     }
 	else{
-		this->inFile.swap(inFile);
+		//this->inFile.swap(inFile);
+		//std::swap(this->inFile,inFile);
+		this->inFile = &inFile;
 	}
+	*/
 	
 }
 
@@ -90,7 +96,13 @@ void tempTrender::hotCold_Upp() {
 	int location_specified = 1;
 	int mode = 1;
 	int start_year = 1722;
+	ifstream inFile(filePath.c_str()); // Check if file exists
+	if(!inFile){
+        std::cout << "No such file";
+		return;
+    }
 	peak_temp_Upp(inFile, start_year, mode, location_specified);
+	inFile.close();
 }
 /*
 // To set and plot the histogram for hottest and coldest date other than Uppsala.

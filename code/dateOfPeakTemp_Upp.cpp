@@ -69,7 +69,7 @@
 #include <iomanip>
 #include <vector>
 #include <utility>
-#include "Date.cpp"
+#include "../Date.cpp"
 #include "TH1I.h"
 #include "TLegend.h"
 #include "TF1.h"
@@ -112,7 +112,7 @@ void peak_temp_Upp_old(ifstream &inFile, int start_year, int mode, int location_
     while (!inFile.eof())
     {
         inFile >> year >> month >> day >> temp1 >> temp2 >> location;
-        cout << year<< month <<day << temp1 << temp2 << location<< endl;
+        //cout << year<< month <<day << temp1 << temp2 << location<< endl;
         if (location == location_specified || location_specified == 0)
         {
             if (year > start_year)

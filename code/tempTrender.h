@@ -28,7 +28,8 @@ class tempTrender {
 
 	private:
 		
-		std::ifstream inFile;
+	//std::ifstream& inFile;
+		
 };
 
 #endif
