@@ -34,6 +34,18 @@ using namespace std;
 tempTrender::tempTrender(string filePath) {
 	cout << "The user supplied " << filePath << " as the path to the data file." << endl;
 	cout << "You should probably store this information in a member variable of the class. Good luck with the project! :)" << endl;
+	filePath = filePath;
+	/*
+	ifstream inFile(filePath);
+	if (!inFile)
+    {
+        std::cout << "No such file";
+		return;
+    }
+	else{
+		this->inFile.swap(inFile);
+	}
+	*/
 }
 
 /* 
@@ -47,16 +59,11 @@ Root function to plot histograms of the annual average temperatures from the ann
 void tempTrender::tempPerYear(int yearToExtrapolate){
 	int first_year = 1722;
 	int last_year = 2013;
-	int box_interval = 5;
 	
 	ifstream processedfile("../ProcessedData/UppsalaData/annualtemp.txt"); // Check if file exists
 	if(!processedfile){
 		output_annual_temp(first_year, last_year);}
 	processedfile.close();
-	ifstream movingmeanfile("../ProcessedData/UppsalaData/movingboxmeantemp.txt"); // Check if file exists
-	if(!movingmeanfile){
-		moving_mean_all(first_year, last_year, box_interval);}
-		movingmeanfile.close();
 	
 	tempYearplotandpred(yearToExtrapolate);	
 }
