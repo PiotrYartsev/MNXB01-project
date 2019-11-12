@@ -16,10 +16,9 @@ void project() {
 	//t.tempOnDay(235);
 	//t.tempPerDay();
 	//t.hotCold();
+	t.hotCold_Upp();
 	t.tempPerYear(2050);
 	//Needs fixing
-	//t.hotCold_Upp();
-	
 	//t.tempOnDay(8, 23); //Call some functions that you've implemented
 	//t.tempOnDay(235);
 	//t.tempPerDay();
