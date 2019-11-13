@@ -183,7 +183,7 @@ double tempYearplotandpred(Int_t input_year)
 		
 		  // Save the canvas as a picture
 		
-		c1->SaveAs("../Plots/tempYear.png");
+		c1->SaveAs("../images/tempYear.png");
 		return extratemp;
 		
 	}
