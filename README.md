@@ -46,7 +46,7 @@ The reduced chi-square of the fit is also output to standard output, it should b
 
 ### To run Project C only:
 To run Project C that shows the number of days that have an daily average temperature below 0 in each year,
- run the file in the directory /code named cleaning_data.sh (WARNING! The code is slow and it can take up to 30 min to finish!!)
+ run the file in the directory code/ named cleaning_data.sh (WARNING! The code is slow and it can take up to 30 min to finish!!)
 
 ## Authors
 
