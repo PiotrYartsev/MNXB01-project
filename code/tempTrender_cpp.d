@@ -54,6 +54,11 @@
 ./tempTrender_cpp.so: /usr/include/root/TGaxis.h /usr/include/root/TLine.h
 ./tempTrender_cpp.so: /usr/include/root/TLegend.h /usr/include/root/TPave.h
 ./tempTrender_cpp.so: /usr/include/root/TBox.h annualtemp.cpp
-./tempTrender_cpp.so: tempYearplotandpred.cpp /usr/include/root/TH1I.h
+./tempTrender_cpp.so: tempYearplotandpred.cpp dateOfPeakTemp_Upp.cpp
+./tempTrender_cpp.so: ../Date.cpp ../Date.h /usr/include/root/TH1I.h
+./tempTrender_cpp.so: /usr/include/root/TROOT.h
+./tempTrender_cpp.so: /usr/include/root/TDirectory.h
+./tempTrender_cpp.so: /usr/include/root/TList.h /usr/include/root/TDatime.h
+./tempTrender_cpp.so: /usr/include/root/TUUID.h
 ./tempTrender_cpp.so: /usr/include/root/cintdictversion.h /usr/include/root/RVersion.h
 tempTrender_cpp__ROOTBUILDVERSION= 5.34/30
