@@ -1,2 +1,0 @@
-/home/courseuser/MNXB01-project/CleanData/datasets/smhi-opendata_Lulea/data_years_smhi-opendata_Lulea.txt
-/home/courseuser/MNXB01-project/CleanData/datasets/smhi-opendata_Lulea/Final.txt

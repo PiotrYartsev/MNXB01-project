@@ -1,10 +1,10 @@
 #!/bin/bash
 
-#List of all the data files that we will use in this project
+#List of all the data files that we wanted to use in this project
 #declare -a data=(smhi-opendata_Lulea.csv smhi-opendata_Lund.csv smhi-opendata_Visby.csv smhi-opendata_Umea.csv smhi-opendata_Falsterbo.csv smhi-opendata_Soderarm.csv smhi-openda_Karlstad.csv smhi-opendata_Boras.csv smhi-opendata_Falun.csv)
 
 
-#test list
+#Data file we used for this project
 declare -a data=(smhi-opendata_Lulea.csv )
 
 
@@ -164,7 +164,6 @@ done
 done < CleanData/datasets/${name::-4}/data_years_${name::-3}txt
 echo "Done extracting data"
 
-
 echo "Count the nummber of days that have average temperature bellow zero each year"
 #count the number of instances for each year where the daily average temperature was below 0
 while IFS= read -r line
@@ -172,30 +171,31 @@ while IFS= read -r line
 echo $line | grep -o "-" | wc -l >> CleanData/datasets/${name::-4}/Final.txt
 done < CleanData/datasets/${name::-4}/day_temp_med_year.txt
 
-
-n=0
 #remove values zero 
 echo "remove lines that are less 5"
-while IFS= read -r line
-	do
-if(line<5)
-then && echo "$line"
-n++
-fi
-done < CleanData/datasets/${name::-4}/Final.txt
-echo n
-sed -i '1,${n}d' < CleanData/datasets/${name::-4}/data_years_${name::-3}txt
-done
 
+sed -i 1,10d  CleanData/datasets/${name::-4}/Final.txt
+sed -i 1,10d  CleanData/datasets/${name::-4}/data_years_${name::-3}txt
+sed -i '$d' CleanData/datasets/${name::-4}/Final.txt
+sed -i '$d' CleanData/datasets/${name::-4}/data_years_${name::-3}txt
+done
 
 echo "Plot the data for Lulea"
 cd CleanData/
-echo "$(readlink -f datasets/${name::-4}/data_years_${name::-3}txt)"
 echo "$(realpath datasets/${name::-4}/data_years_${name::-3}txt)" >> input.txt
 echo "$(realpath datasets/${name::-4}/Final.txt)" >> input.txt
-echo "$(readlink -f datasets/${name::-4}/Final.txt)"
+cd ..
+echo "$(readlink -f images)" >> CleanData/input.txt
 
-root .x graph.C+ < input.txt
+
+if [ -f images/Lulea.pdf ]; then
+	   rm -f images/Lulea.pdf
+	   echo "Deleted images/Lulea.pdf"
+
+
+fi	
+root .x code/graph.C+ < CleanData/input.txt
 .q
-rm input.txt
+rm CleanData/input.txt
+
 echo "done"

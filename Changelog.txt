@@ -39,3 +39,6 @@ for some reason it cannot compile and load on the course version of Ubuntu/and o
 
 13/11-2019
 Uploaded most recent version of weather-report.pdf from overleaf, (and removed the old one) and updated README.md
+
+13/11-2019
+Done with my part about Lulea. The code creates all the right files and the final graph looks fine.
