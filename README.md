@@ -6,7 +6,7 @@ The project is divided in three parts, as described in the report.
 
 ## Organisation of Directories
 In directory CleanData you can find the directory datasets, in which all the raw unprocessed datasets from SMHI are found.
-The code directory, the code for cleaning up the data necessary for Project A and Project B are found. The code for doing analysis and making plots is there as well. Everything should run automaticaly if you follow the procedure described below. When you start root, processed data will be filled put in the ProcessedData/UppsalaData dir, and plots will be put it in the Plots and images directories.
+The code directory, the code for cleaning up the data necessary for Project A and Project B are found. The code for doing analysis and making plots is there as well. Everything should run automaticaly if you follow the procedure described below. When you start root, processed data will be filled put in the ProcessedData/UppsalaData dir, and plots will be put it in the images directory.
 
 ## Getting Started
 To be sure that everything works, the script has been tested on the following versions:
