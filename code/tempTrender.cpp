@@ -36,20 +36,6 @@ tempTrender::tempTrender(string filePath) {
 	cout << "The user supplied " << filePath << " as the path to the data file." << endl;
 	cout << "You should probably store this information in a member variable of the class. Good luck with the project! :)" << endl;
 	this->filePath = filePath;
-	/*
-	ifstream inFile(filePath.c_str());
-	if (!inFile)
-    {
-        std::cout << "No such file";
-		return;
-    }
-	else{
-		//this->inFile.swap(inFile);
-		//std::swap(this->inFile,inFile);
-		this->inFile = &inFile;
-	}
-	*/
-	
 }
 
 /* 
@@ -71,26 +57,7 @@ void tempTrender::tempPerYear(int yearToExtrapolate){
 	
 	tempYearplotandpred(yearToExtrapolate);	
 }
-	
 
-
-/* Does not work with all root/and or ubuntu versions. Needs to be fixed.
-tempTrender::tempTrender(string filePath) {
-	cout << "The user supplied " << filePath << " as the path to the data file." << endl;
-	//cout << "You should probably store this information in a member variable of the class. Good luck with the project! :)" << endl;
-    ifstream inFile(filePath);
-	if (!inFile)
-    {
-        std::cout << "No such file";
-		return;
-    }
-	else{
-		this->inFile.swap(inFile);
-	}
-}
-*/
-
-//Fix before we can proceed.
 // To set and plot the histogram for hottest and coldest date in Uppsala.
 void tempTrender::hotCold_Upp() {
 	int location_specified = 1;
