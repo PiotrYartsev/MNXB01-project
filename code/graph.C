@@ -48,7 +48,6 @@ std::cout << Path << "\n";
    gr->SetTitle("Days with average temperature bellow 0 each year");
    gr->GetXaxis()->SetTitle("Year");
    gr->GetYaxis()->SetTitle("Nummber of days");
-   gr->SetNpx(10000);
    gr->Draw("ACP");
    gr->Fit("pol1");
    TF1 *f3 = gr->GetFunction("pol1");

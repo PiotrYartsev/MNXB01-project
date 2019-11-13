@@ -47,7 +47,7 @@ for name in "${data[@]}"
 	done < CleanData/datasets/${name}
 	
 	echo "Done cleaning data"
-	echo "Start exrracting data to new files such as dates, temperatures, years e.t.c. "
+	echo "Start extracting data to new files such as dates, temperatures, years e.t.c. "
 	touch CleanData/datasets/${name::-4}/data_date_${name::-3}txt
 	#extract date, time and temp from cvs
 	while IFS=';' read -r one two three four
@@ -164,7 +164,7 @@ done
 done < CleanData/datasets/${name::-4}/data_years_${name::-3}txt
 echo "Done extracting data"
 
-echo "Count the nummber of days that have average temperature bellow zero each year"
+echo "Count the number of days that have average temperature bellow zero each year"
 #count the number of instances for each year where the daily average temperature was below 0
 while IFS= read -r line
 	do
@@ -180,7 +180,7 @@ sed -i '$d' CleanData/datasets/${name::-4}/Final.txt
 sed -i '$d' CleanData/datasets/${name::-4}/data_years_${name::-3}txt
 done
 
-echo "Plot the data for Lulea"
+echo "Plot the data for ${name::-4}"
 cd CleanData/
 echo "$(realpath datasets/${name::-4}/data_years_${name::-3}txt)" >> input.txt
 echo "$(realpath datasets/${name::-4}/Final.txt)" >> input.txt
@@ -197,5 +197,5 @@ fi
 root .x code/graph.C+ < CleanData/input.txt
 .q
 rm CleanData/input.txt
-
+rm a.out
 echo "done"
