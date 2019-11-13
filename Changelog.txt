@@ -36,3 +36,6 @@ Seems more logical. Also a folder "Plots".
 12/10-2019
 I fixed some small stuff and removed old stuff. Also uncommented everythin related to HotCold() function in the code folder, 
 for some reason it cannot compile and load on the course version of Ubuntu/and or root, which messes up when I try to run my code, we need to fix this today.
+
+13/11-2019
+Uploaded most recent version of weather-report.pdf from overleaf, (and removed the old one) and updated README.md

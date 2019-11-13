@@ -1,1 +1,0 @@
-1. To run the programm that shows the nummber of days that have an daily average temperature bellow 0 in each year run the file in the directory CLeandata named cleaning_data.sh (WARNING! The code is slow and it can take up to 30 min to finish!!)
