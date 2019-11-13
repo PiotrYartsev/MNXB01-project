@@ -9,6 +9,7 @@
 \setlength\parindent{0pt}
 \usepackage{siunitx}
 \usepackage{float}
+\usepackage{listings}
 
 \begin{document}
 \title{Weather Report\\\textit{Insights drawn from weather measurements in Sweden} \\ FYTN03}
@@ -21,35 +22,34 @@ Piotr Yartsev, Xi-Zhen Liu} % Author name
 
 \newpage
 
-\section{Introduction}
+\section{Introduction}\label{sec:intro}
 The Swedish Meteorological and Hydrological Institute (SMHI) routinely records the temperature at various locations in Sweden. In some places, this has been going on for hundreds of years. The goal of this project is to find at least three interesting results from the SMHI data. The Data set consists of essentially these parameters: Time (in format year-month-day-hour:minute), Temperature, longitude, latitude, altitude. We are using C++ and bash script to clean and process the data, then use ROOT to visualize those data and do further analysis. 
 
-The three main questions we are interested in from these measurements are:
-\begin{enumerate}
-\item How the annual average temperature in Uppsala changed since the industrial revolution in Sweden, approx 1880?
-\item How many days a year is the average temperature in Lulea below 0?
-\item Which is the hottest and coldest day most likely to occur in one of the locations in the data set?
-\end{enumerate}
+%The three main questions we are interested in from these measurements are:
+%\begin{enumerate}
+%\item How the annual average temperature in Uppsala changed since the industrial revolution in Sweden, approx 1880?
+%\item How many days a year is the average temperature in Lulea below 0?
+%\item Which is the hottest and coldest day most likely to occur in one of the locations in the data set?
+%\end{enumerate}
 
-The Report is divided up in three parts, by three main questions to investigate:
+The report is divided up in three parts, by three main questions to investigate:
 \begin{itemize}
 \item \textbf{Part A}: The rising temperature in Uppsala and surroundings. This part aims at detect changes or trends in the annual average temperature in and around Uppsala from the period 1722-2013. Of particular interest is to see if an appropriate function fitted on the annual averages can predict future temperatures.\\
-\item \textbf{Part B}:
 
-\item \textbf{Part C}:
+\item \textbf{Part B}: How many days a year is the average temperature in Lulea below 0?
+
+\item \textbf{Part C}: Which is the hottest and coldest day most likely to occur in one of the locations in Uppsala?
 \end{itemize}
 
-The report is set up as follows: Chapter 2 is the introduction of some theories we applied to our questions. Chapter 3 we will talk about how the code works, from reading files to generating plots. Chapter 4 would be the answer of our questions, with some plots. In chapter 5 we discuss our result and explain what we have done.
+The report is set up as follows: Sec. \ref{sec:intro} is the introduction of some theories we applied to our questions. In Sec. \ref{sec:method}  we describe how the code works, from reading files to generating plots. Sec. \ref{sec:results} contains the answer of our questions, with some plots. In Sec. \ref{sec:discussion} we discuss our result and explain what we have done.
 
 \subsection{Part A: The rising temperature in Uppsala and surroundings}
-With the help of the collected data of over 200 years of daily measurements of temperature in Uppsala and surroundings, the yearly average temperatures can be computed and compared from 1722 until 2013. To more clearly see trends over a few years a time, a moving mean of these yearly averages with an interval of five years is computed.  From the yearly averages, the parameter of a chosen function can be fit to try to see if it detects trends such as global warming since the industrial revolution (here approximated to 1880) even though the data set only contains measurements from Uppsala and the surroundings. Once a function has been fit, it might be interesting to see what it predicts about the future by extrapolating.
-
-\subsection{Part B:}
-
-\subsection{Part C:}
+With the help of the collected data of over 200 years of daily measurements of temperature in Uppsala and surroundings, the yearly average temperatures can be computed and compared from 1722 until 2013. To more clearly see trends over a few years a time, two moving means of these yearly averages with an interval of five years and ten years, respectively, are computed and shown in Fig.\ref{fig:year}.  From the yearly averages, the parameter of a chosen function can be fit to try to see if it detects trends such as global warming since the industrial revolution (here approximated to 1880) even though the data set only contains measurements from Uppsala and the surroundings. Once a function has been fit, it might be interesting to see what it predicts about the future by extrapolating.
+\subsection{Part B: Number of cold days in Lulea each year} 
+\subsection{Part C: Which is the hottest and coldest day most likely to occur in one of the locations in Uppsala?}
 
 
-\section{Method}
+\section{Method}\label{sec:method}
 
 \subsection{Part A: The rising temperature in Uppsala and surroundings}
 \subsubsection{Cleaning up the Data with C++}
@@ -65,19 +65,53 @@ A third histogram totalTemp was filled, which simply contained all the annual av
 In order to compute and plot a moving mean, a graph was incremented with points from an array containing the annualtemps like the histogram totalTemp. With a fixed box interval representing the number of years two average over, for a fixed bin (or year) in the array with all the annual average temperatures, the average was taken over the nearest neighbour years by incrementing in another nested for-loop. In this way, the graph could be added points and produce a smooth curve with a moving mean. Two moving means were computed, one with a box-interval of 5-years and one with 10-years.
 
 \subsubsection{How to run the code:}
-All C++ scripts for cleaning up \textbf{Part A} were included and implemented as class methods in a class called TempTrender, where the methods for the other parts of this report where included as well. To get the extrapolated year, simply call t.tempPerYear(int yeartoExtrapolate) once the TempTrender.cpp file and header have been compiled. It should work automatically if you just log in to root in the "code" directory where the rootlogon.C file is located. You can also just call Project() in root in the "code" directory, if the compilation was successful. 
+All C++ scripts for cleaning up \textbf{Part A} were included and implemented as class methods in a class called TempTrender, where the methods for the other parts of this report where included as well. To get the extrapolated year, simply call tempYearplotandpred(int yeartoExtrapolate) once logged in to root in the "code" directory. It should work automatically if you just log in to root in the "code" directory where the rootlogon.C file is located. You can also just call Project() in root in the "code" directory, if the compilation was successful, the default yeartoExtrapolate when called in project.cpp being 2050. 
 
-\subsection{Part B}
-For the program that measures the number of days with a average temperature below 0 each year in Lulea bash was predominately used as it is very good at manipulating strings,  which we thought was very good for this task as after we converted the cvs to a txt file all the files we would deal with in this task would have been txt files with strings.
+\subsection{Part B: Number of cold days in Lulea each year}
 
-To extract the data from the cvs we iterated over each line in the file and extracted all lines containing ;G as the G denotes lines that have good data. We remove any characters following the G as it includes text describing the cvs file which we do not need.
+For the program that measures the number of days with a average temperature below 0 C each year in Lulea BASH was predominately used as it is very good at manipulating strings,  which we thought was very good for this task as after we converted the cvs to a txt file all the files we would deal with in this task would have been txt. files with strings.
+\subsubsection{Cleaning the data with BASH}
+Cleaning the date involved many processes and steps.
+First we extract all lines from the cvs that contain \textbf{;G} to an file called \textbf{data\_temp\_smhi-opendata\_Lulea.txt} as the \textbf{G} denotes lines that have good data. We remove any characters following the G as it includes text describing the cvs file which we do not need.
+Using \begin{lstlisting}[language=Bash]
+while IFS=';' read -r one two three four
+\end{lstlisting}  we separated the data text file by semicolons. We move the first part (the dates) into a new txt file called \textbf{data\_date\_smhi-opendata\_Lulea.txt}. We ignore part two and part four as they are the time when the measurement was taken and the quality of the measurement, in this case always good as we only copied the values denoted \textbf{G} from the cvs, because for our purpose the data is useless. We also ignore part three that contains the temperature measurement as we will extract them later. 
 
-\subsection{Part C}
+We then want to put all the temperature measurement for each day on one line. We achieve this by first removing all the duplicate dates from \textbf{data\_date\_smhi-opendata\_Lulea.txt}, then reading said txt file line by line we grab all the temperature measurement from the \textbf{data\_temp\_smhi-opendata\_Lulea.txt} that contains the date from the date file using the grep command and we put the temperatures in a new file called \textbf{data\_temp\_day\_smhi-opendata\_Lulea.txt} seperating the values by a semicolon.
+\subsubsection{Calculating daily average temperature with C++}
+By putting the names of the file \textbf{data\_temp\_smhi-opendata\_Lulea.txt} into a temperary file called \textbf{Input.txt} we can parse the temporary file as the argument for an c++ file. We create a c++ file that opens the \textbf{data\_temp\_smhi-opendata\_Lulea.txt} file using \begin{lstlisting}[language=C]
+std::ifstream
+\end{lstlisting} and then iterate over each line in the txt file. For each line a two variables \begin{lstlisting}[language=C]
+double number=0;
+int i=0;
+\end{lstlisting} are created. Then the line is separated by a semicolon into many parts and each part is converted to an double variable and added to the \textbf{number} variable and for each part add one to \textbf{i}.
+Then we add the average number of each line, $\frac{\textbf{number}}{\textbf{i}}$, to a new document called \textbf{day\_temp\_med\_day.txt}. Using the same method as when we put all the daily temperatures on the same line we put all the temperatures for each year on separate lines. We then count the number of occurrences of the character - using \begin{lstlisting}[language=Bash]
+grep -o "-" | wc -l
+\end{lstlisting} and put it into a file called \textbf{Final.txt}.
+
+\subsubsection{Plotting using ROOT}
+Plotting with \textbf{ROOT} is done in a similar fashion as in the case with the \textbf{C++} where the files \textbf{Final.txt} and \textbf{dat\_years\_smhi-opendata\_Lulea.txt} are parsed as arguments into the \textbf{ROOT} file called \textbf{graph.C}. \textbf{graph.C}, in a similar fashion as the c++ code, reads the input files line by line and extracts the Numbers/dates and put them into two arrays, \textbf{x} and \textbf{y}. The two arrays are then plotted against each-other and a linear fit is added with 
+\begin{lstlisting}[language=C]
+gr->Fit("pol1")
+\end{lstlisting} where "pol1" references a polynomial of degree one.
+
+\subsubsection{How to run the code:}
+In the folder \textbf{code} if you run clean \textbf{cleaning\_data.sh} it will execute all the data cleaning, the \textbf{C++} calculations and will plot a graph with root automatically and save the plot. You can the find all the cleaned data in the \textbf{CleanData/datasets/smhi-opendata\_Lulea} folder.
+
+\subsection{Part C: Which is the hottest and coldest day most likely to occur in one of the locations in Uppsala?}
+\subsubsection{Construct a class Date with C++}
+To find out the hottest and coldest day of a year, we have to extract date information from the data. This means we have to do some conversion among string type data, number type data, and calculated day of the year. Moreover, this conversion might be useful for other tasks since almost all the analysis take date into consideration. Other attributes like temperature can also be stored in the class. Therefore, we build a class Date to solve the conversion and reusing problems. This class can let us easily convert datatype by calling its methods, which considerably reduces our tasks later.
+\subsubsection{Read the data with C++}
+We use C++ filestream library to read data word by word, which is split by space and newline character. Then we parse those readed string to the type it should be. For example, year should be integer, temperature should be double. After, we construct a object of class Date and set those variables as the object's members. For each year, we find the hottest and coldest date by comparing the current processing date with the previous peak temperature date.
+Once we finish scanning a year, the peak date will be push to the back of a vector, storing all the peak data.
+\subsubsection{Plotting with ROOT}
+Each time the year is scanned through, we can fill the data to the histogram created by ROOT. By doing so, we can fill out all the data after finishing reading data without another round for filling. And the class Date also makes things easier by the function \textbf{day\_of\_year()}. 
+\subsubsection{How to run the code}
+In \textbf{project.cpp}, provide your path of the data file and create an object\textbf{ tempTrender t(pathToFile)}, then call the member function \textbf{hotCold\_Upp()}. The histogram would be saved in \textbf{/images} directory.
 
 
 
-
-\section{Results}
+\section{Results}\label{sec:results}
 \subsection{Part A: The rising temperature in Uppsala and surroundings}
 The results from Part A are shown in Fig \ref{fig:year}. The moving mean with a 5-year box interval is plotted as a solid black line, the one with a 10-year box interval is plotted as a solid gray line and the fitted polynomial as a green dashed line. The increase in temperature is clearly visible from the upwards curved polynomial from around $1980-2013$, and also from the moving means, which fluctuates less than the annual averages and mostly stays above the total mean in the last two decades.
 \begin{figure}[H]
@@ -91,10 +125,8 @@ The reduced $\chi^2 \approx 0.8$ for the polynomial fit, suggesting a slight und
 
 \subsection{Part B:}
 
-\subsection{Part C:}
-\begin{enumerate}
-\item Q1
-\item Q2
+\subsection{Part C: Which is the hottest and coldest day most likely to occur in one of the locations in Uppsala?}
+
 \item The warmest and coldest day of each year
 \begin{figure}[H]
     \centering
@@ -104,19 +136,14 @@ The reduced $\chi^2 \approx 0.8$ for the polynomial fit, suggesting a slight und
 \end{figure}
 As the histogram shows, the most likely coldest day is on the end of the year (31/12), and the most likely hottest day is on 13/7.
 
-\end{enumerate}
-
-\section{Discussion}
+\section{Discussion}\label{sec:discussion}
 \subsection{Part A: The rising temperature in Uppsala and surroundings}
 From Fig. \ref{fig:year} it is clear that the average temperature is rising not only globally, but also on a local level in mid-Sweden. In this report we have confirmed concerns of global temperature rising using measurements from Uppsala and surroundings, but it would be interesting to compare with data from other places around the world, to see how the changes correlate. It would also be interesting to see which locations are more affected by the global warming than others. This is left for future research.
 
 \subsection{Part B:}
-\subsection{Part C:}
-\begin{enumerate}
+From Figure X we can see that the number of days bellow 0 C each year varies quite a bit, but there seams to be a trend down, which would make sense as when the earth gets hotter do to global warming the number of days bellow 0 C would naturally decrees. There seams to be a periodicity in the fluctuations, but the data is to noisy for a sin fit so we did not do one.  To say it with confidence is not possible as the number of years and the variance in the values makes it.
 
-\item Q1
-\item Q2
-\item The warmest and coldest day of each year
+\subsection{Part C: The warmest and coldest day of each year}
 
 The question is to try to find out the possibilities of dates to become the hottest and coldest date. We read the data of Uppsala and then plot the histogram of the occurrence for each date being hottest or coldest. 
 
@@ -154,15 +181,12 @@ To solve the second problem, we extend the length of the x-axis of histogram to 
     \caption{extended histogram at the end of the year}
     \label{fig:hist}
 \end{figure}
-
-The final histogram:
 \begin{figure}[htp]
     \centering
     \includegraphics[width=8cm]{./images/hotCold_Upp_final}
     \caption{final histogram}
     \label{fig:hist}
 \end{figure}
-\end{enumerate}
 
 
 
