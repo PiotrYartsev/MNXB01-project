@@ -140,7 +140,7 @@ double tempYearplotandpred(Int_t input_year)
 	    legend->SetTextSize(0.025);
 	    legend->Draw();
 	   
-	// Below code creates a nice graph for the moving mean with box_interval 5 years.
+	// Below code creates a nice graph for the moving mean with 2*box_interval = 10 years.
 	int box_interval = 5;	  
 	TGraph* graph = new TGraph();
 	for(int bin = box_interval; bin < interval - box_interval; bin += box_interval) {
@@ -156,7 +156,8 @@ double tempYearplotandpred(Int_t input_year)
 	graph->SetLineColor(kBlack);
 	
 		
-	//Make a new graph with moving means of box_interval = 10 years.	
+	//Make a new graph with moving means of 2*box_interval = 20 years.	
+	
 	int box_interval2 = 10;	  
 	TGraph* graph2 = new TGraph();
 	  
@@ -174,11 +175,11 @@ double tempYearplotandpred(Int_t input_year)
 		graph2->SetLineColor(kGray+2);
 		graph->SetName("Moving Mean");
 		graph->Draw("SAME C");
-		graph2->SetName("Moving Mean,10");
+		graph2->SetName("Moving Mean,20");
 		graph2->Draw("SAME C");
 		
-		legend->AddEntry("Moving Mean","Moving Mean, 5-year interval","l");
-		legend->AddEntry("Moving Mean,10","Moving Mean, 10-year interval","l");
+		legend->AddEntry("Moving Mean","Moving Mean, 10-year interval","l");
+		legend->AddEntry("Moving Mean,20","Moving Mean, 20-year interval","l");
 		
 		  // Save the canvas as a picture
 		
