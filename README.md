@@ -26,7 +26,7 @@ Bash, Ubuntu, C++, root in the above mentioned versions.
 
 ## Order of running scripts
 
-To run Project A and B, simply cd into code directory and type
+To run Project A and C, simply cd into code directory and type
 ```
 .L root -l
 ```
@@ -44,9 +44,19 @@ The reduced chi-square of the fit is also output to standard output, it should b
 
 ### To run Project B only:
 
-### To run Project C only:
-To run Project C that shows the number of days that have an daily average temperature below 0 in each year,
+To run Project B that shows the number of days that have an daily average temperature below 0 in each year,
  run the file in the directory code/ named cleaning_data.sh (WARNING! The code is slow and it can take up to 30 min to finish!!)
+
+### To run Project C only:
+To run Project C that plots the distribution of the hottest and coldest date in a year, type the following lines after you are in ROOT under directory code/:
+
+```c++
+.L tempTrender.cpp+ // if it is not loaded
+tempTrender t("../CleanData/datasets/uppsala_tm_1722-2013.dat");
+t.hotCold_Upp();
+```
+
+Then the plots would be save in the directory images/.
 
 ## Authors
 
