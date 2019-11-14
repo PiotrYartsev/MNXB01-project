@@ -63,7 +63,8 @@ void tempTrender::hotCold_Upp() {
 	int location_specified = 1;
 	int mode = 1;
 	int start_year = 1722;
-	ifstream inFile(filePath.c_str()); // Check if file exists
+	ifstream inFile(filePath.c_str());
+	// Check if file exists
 	if(!inFile){
         std::cout << "No such file";
 		return;
